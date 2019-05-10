@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-class InsureeModule extends Component {
+class LocationModule extends Component {
   static menu = null;
   static routes = [];
 }
 
-export default InsureeModule;
+export default LocationModule;
