@@ -1,4 +1,4 @@
-# openIMIS Backend Location reference module
+# openIMIS Frontend Location reference module
 This repository holds the files of the openIMIS Frontend Location reference module.
 It is dedicated to be deployed as a module of [openimis-fe_js](https://github.com/openimis/openimis-fe_js).
 
