@@ -1,5 +1,8 @@
 {
     "location.HealthFacilityFullPath.region": "Region",
     "location.HealthFacilityFullPath.district": "District",
-    "location.HealthFacilityFullPath.healthFacility": "HF"
+    "location.HealthFacilityFullPath.healthFacility": "HF",
+    "location.RegionSelect.label": "Region",
+    "location.DistrictSelect.label": "District",
+    "location.HealthFacilitySelect.label": "Health Facility"
 }
