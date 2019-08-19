@@ -13,13 +13,13 @@ const styles = theme => ({
     }
 });
 
-class RegionSelect extends Component {
+class RegionPicker extends Component {
 
     formatSuggestion = a => !!a ? `${a.code} ${a.name}` : ""
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "regionsMinCharLookup", 1) &&
-        this.props.fetchRegions(str);
+        this.props.fetchRegions(this.props.modulesManager, str);
 
     debouncedGetSuggestion = _debounce(
         this.getSuggestions,
@@ -29,27 +29,28 @@ class RegionSelect extends Component {
     onSuggestionSelected = v => this.props.onChange(v, this.formatSuggestion(v));
 
     render() {
-        const { intl, initValue, regions, withLabel = true, label, withPlaceholder, placeholder } = this.props;
+        const { intl, value, regions, withLabel = true, label, withPlaceholder, placeholder, readOnly = false } = this.props;
         return <AutoSuggestion
             items={regions}
-            label={!!withLabel && (label || formatMessage(intl, "location", "RegionSelect.label"))}
+            label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
             placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "EgionSelect.placehoder") : null}
             lookup={this.formatSuggestion}
             getSuggestions={this.debouncedGetSuggestion}
             renderSuggestion={a => <span>{this.formatSuggestion(a)}</span>}
             getSuggestionValue={this.formatSuggestion}
             onSuggestionSelected={this.onSuggestionSelected}
-            initValue={initValue}
+            value={value}
+            readOnly={readOnly}
         />
     }
 }
 
 const mapStateToProps = state => ({
-    regions: state.location.regions,
+    regions: state.loc.regions,
 });
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ fetchRegions }, dispatch);
 };
 
-export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(injectIntl(withTheme(withStyles(styles)(RegionSelect)))));
+export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(injectIntl(withTheme(withStyles(styles)(RegionPicker)))));

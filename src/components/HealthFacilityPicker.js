@@ -13,14 +13,14 @@ const styles = theme => ({
     }
 });
 
-class HealthFacilitySelect extends Component {
+class HealthFacilityPicker extends Component {
 
 
-    formatSuggestion = a => `${a.code} ${a.name}`;
+    formatSuggestion = a => !!a ? `${a.code} ${a.name}` : "";
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
-        this.props.fetchHealthFacilities(str);
+        this.props.fetchHealthFacilities(this.props.modulesManager, str);
 
     debouncedGetSuggestion = _debounce(
         this.getSuggestions,
@@ -30,26 +30,27 @@ class HealthFacilitySelect extends Component {
     onSuggestionSelected = v => this.props.onChange(v, this.formatSuggestion(v));
 
     render() {
-        const { intl, initValue, healthFacilities, withLabel = true, label } = this.props;
+        const { intl, value, healthFacilities, withLabel = true, label, readOnly = false } = this.props;
         return <AutoSuggestion
             items={healthFacilities}
-            label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilitySelect.label"))}
+            label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
             lookup={this.formatSuggestion}
             getSuggestions={this.debouncedGetSuggestion}
             renderSuggestion={a => <span>{this.formatSuggestion(a)}</span>}
             getSuggestionValue={this.formatSuggestion}
             onSuggestionSelected={this.onSuggestionSelected}
-            initValue={initValue}
+            value={value}
+            readOnly={readOnly}
         />
     }
 }
 
 const mapStateToProps = state => ({
-    healthFacilities: state.location.healthFacilities,
+    healthFacilities: state.loc.healthFacilities,
 });
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ fetchHealthFacilities }, dispatch);
 };
 
-export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(injectIntl(withTheme(withStyles(styles)(HealthFacilitySelect)))));
+export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(injectIntl(withTheme(withStyles(styles)(HealthFacilityPicker)))));

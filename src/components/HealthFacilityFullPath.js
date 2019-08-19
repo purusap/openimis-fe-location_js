@@ -87,10 +87,10 @@ class HealthFacilityFullPath extends Component {
 }
 
 const mapStateToProps = state => ({
-    healthFacilityFullPath: state.location.healthFacilityFullPath,
-    fetchingHealthFacilityFullPath: state.location.fetchingHealthFacilityFullPath,
-    fetchedHealthFacilityFullPath: state.location.HealthFacilityFullPath,
-    errorHealthFacilityFullPath: state.location.errorHealthFacilityFullPath,
+    healthFacilityFullPath: state.loc.healthFacilityFullPath,
+    fetchingHealthFacilityFullPath: state.loc.fetchingHealthFacilityFullPath,
+    fetchedHealthFacilityFullPath: state.loc.HealthFacilityFullPath,
+    errorHealthFacilityFullPath: state.loc.errorHealthFacilityFullPath,
 });
 
 const mapDispatchToProps = dispatch => {

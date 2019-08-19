@@ -2,7 +2,7 @@
     "location.HealthFacilityFullPath.region": "Region",
     "location.HealthFacilityFullPath.district": "District",
     "location.HealthFacilityFullPath.healthFacility": "HF",
-    "location.RegionSelect.label": "Region",
-    "location.DistrictSelect.label": "District",
-    "location.HealthFacilitySelect.label": "Health Facility"
+    "location.RegionPicker.label": "Region",
+    "location.DistrictPicker.label": "District",
+    "location.HealthFacilityPicker.label": "Health Facility"
 }

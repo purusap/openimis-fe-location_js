@@ -10,26 +10,26 @@ export function fetchHealthFacilityFullPath(hfid) {
   return graphql(payload, 'LOCATION_HEALTH_FACILITY_FULL_PATH');
 }
 
-export function fetchHealthFacilities(str) {
+export function fetchHealthFacilities(mm, str) {
   let payload = formatPageQuery("healthFacilitiesStr",
     !!str && str.length && [`str:"${str}"`],
-    ["id", "code", "name"]
+    mm.getRef("location.HealthFacilityPicker.projection")
   );
   return graphql(payload, 'LOCATION_HEALTH_FACILITIES');
 }
 
-export function fetchDistricts(str) {
+export function fetchDistricts(mm, str) {
   let payload = formatPageQuery("locationsStr",
     [`tpe: "D"`, !!str && str.length && `str:"${str}"`],
-    ["id", "code", "name"]
+    mm.getRef("location.DistrictPicker.projection")
   );
   return graphql(payload, 'LOCATION_DISTRICTS');
 }
 
-export function fetchRegions(str) {
+export function fetchRegions(mm, str) {
   let payload = formatPageQuery("locationsStr",
     [`tpe: "R"`, !!str && str.length && `str:"${str}"`],
-    ["id", "code", "name"]
+    mm.getRef("location.RegionPicker.projection")
   );
   return graphql(payload, 'LOCATION_REGIONS');
 }
