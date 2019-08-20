@@ -33,7 +33,7 @@ class RegionPicker extends Component {
         return <AutoSuggestion
             items={regions}
             label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
-            placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "EgionSelect.placehoder") : null}
+            placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "RegionPicker.placehoder") : null}
             lookup={this.formatSuggestion}
             getSuggestions={this.debouncedGetSuggestion}
             renderSuggestion={a => <span>{this.formatSuggestion(a)}</span>}
