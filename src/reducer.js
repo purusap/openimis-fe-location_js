@@ -1,7 +1,8 @@
 import { formatServerError, formatGraphQLError, parseData } from '@openimis/fe-core';
+import { healthFacilityLabel, locationLabel } from "./utils";
 
 function reducer(
-    state = {   
+    state = {
         fetchingHealthFacilityFullPath: false,
         fetchedHealthFacilityFullPath: false,
         healthFacilityFullPath: null,
@@ -22,6 +23,15 @@ function reducer(
     action,
 ) {
     switch (action.type) {
+        case 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH_RESP':
+            let hfFullPath = parseData(action.payload.data.healthFacilities)[0];
+            return {
+                ...state,
+                userHealthFacilityFullPath: hfFullPath,
+                userHealthFacilityStr: healthFacilityLabel(hfFullPath),
+                userRegionStr: locationLabel(hfFullPath.location.parent),
+                userDistrictStr: locationLabel(hfFullPath.location),
+            }
         case 'LOCATION_HEALTH_FACILITY_FULL_PATH_REQ':
             return {
                 ...state,

@@ -6,6 +6,7 @@ import { injectIntl } from 'react-intl';
 import { fetchHealthFacilities } from "../actions";
 import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
+import { healthFacilityLabel } from "../utils";
 
 const styles = theme => ({
     label: {
@@ -14,9 +15,6 @@ const styles = theme => ({
 });
 
 class HealthFacilityPicker extends Component {
-
-
-    formatSuggestion = a => !!a ? `${a.code} ${a.name}` : "";
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
@@ -27,17 +25,17 @@ class HealthFacilityPicker extends Component {
         this.props.modulesManager.getConf("fe-location", "debounceTime", 800)
     )
 
-    onSuggestionSelected = v => this.props.onChange(v, this.formatSuggestion(v));
+    onSuggestionSelected = v => this.props.onChange(v, healthFacilityLabel(v));
 
     render() {
         const { intl, value, healthFacilities, withLabel = true, label, readOnly = false } = this.props;
         return <AutoSuggestion
             items={healthFacilities}
             label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
-            lookup={this.formatSuggestion}
+            lookup={healthFacilityLabel}
             getSuggestions={this.debouncedGetSuggestion}
-            renderSuggestion={a => <span>{this.formatSuggestion(a)}</span>}
-            getSuggestionValue={this.formatSuggestion}
+            renderSuggestion={a => <span>{healthFacilityLabel(a)}</span>}
+            getSuggestionValue={healthFacilityLabel}
             onSuggestionSelected={this.onSuggestionSelected}
             value={value}
             readOnly={readOnly}

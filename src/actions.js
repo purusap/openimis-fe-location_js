@@ -1,4 +1,12 @@
-import { graphql, decodeId, formatQuery, formatPageQuery } from "@openimis/fe-core";
+import { graphql, decodeId, formatQuery, formatPageQuery, encodeId } from "@openimis/fe-core";
+
+export function fetchUserHealthFacilityFullPath(mm, id) {
+  let payload = formatPageQuery("healthFacilities",
+    [`id: "${encodeId(mm, "location.HealthFacilityGQLType", id)}"`],
+    ["id", "code", "name", "location{id, code, name, parent{id, code, name}}"]
+  );
+  return graphql(payload, 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH');
+}
 
 export function fetchHealthFacilityFullPath(hfid) {
   let payload = formatQuery("healthFacilityFullPath",
