@@ -5,7 +5,6 @@ import { fetchUserHealthFacilityFullPath } from "../actions";
 import { withModulesManager } from "@openimis/fe-core";
 
 class UserHealthFacility extends Component {
-
     componentDidMount() {
         if (!!this.props.user.health_facility_id) {
             this.props.fetchUserHealthFacilityFullPath(

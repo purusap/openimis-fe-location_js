@@ -2,7 +2,7 @@ import { graphql, decodeId, formatQuery, formatPageQuery, encodeId } from "@open
 
 export function fetchUserHealthFacilityFullPath(mm, id) {
   let payload = formatPageQuery("healthFacilities",
-    [`id: "${encodeId(mm, "location.HealthFacilityGQLType", id)}"`],
+    [`id: "${encodeId(mm, "location", "location.HealthFacilityGQLType", id)}"`],
     ["id", "code", "name", "location{id, code, name, parent{id, code, name}}"]
   );
   return graphql(payload, 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH');
