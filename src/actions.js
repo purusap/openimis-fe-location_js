@@ -1,43 +1,38 @@
 import { graphql, decodeId, formatQuery, formatPageQuery, encodeId } from "@openimis/fe-core";
 
-export function fetchUserHealthFacilityFullPath(mm, id) {
+export function fetchUserDistricts() {
+  let payload = formatQuery("userDistricts",
+    null,
+    ["id", "code", "name",
+      "regionId", "regionCode", "regionName"]
+  );
+  return graphql(payload, 'LOCATION_USER_DISTRICTS');
+}
+
+function healthFacilityFullPath(key, mm, id) {
   let payload = formatPageQuery("healthFacilities",
-    [`id: "${encodeId(mm, "location", "location.HealthFacilityGQLType", id)}"`],
-    ["id", "code", "name", "location{id, code, name, parent{id, code, name}}"]
+    [`id: "${id}"`],
+    mm.getRef("location.HealthFacilityPicker.projection")
   );
-  return graphql(payload, 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH');
+  return graphql(payload, key);
 }
 
-export function fetchHealthFacilityFullPath(hfid) {
-  let payload = formatQuery("healthFacilityFullPath",
-    [`hfId:${decodeId(hfid)}`],
-    ["hfId", "hfCode", "hfName", "hfLevel",
-      "regionId", "regionCode", "regionName",
-      "districtId", "districtCode", "districtName"]
-  );
-  return graphql(payload, 'LOCATION_HEALTH_FACILITY_FULL_PATH');
+export function fetchUserHealthFacilityFullPath(mm, id) {
+  return healthFacilityFullPath('LOCATION_USER_HEALTH_FACILITY_FULL_PATH', mm, id);
 }
 
-export function fetchHealthFacilities(mm, str) {
+export function fetchHealthFacilityFullPath(mm, id) {
+  return healthFacilityFullPath('LOCATION_HEALTH_FACILITY_FULL_PATH', mm, id);
+}
+
+export function fetchHealthFacilities(mm, region, district, str) {
+  let filters = [];
+  if (!!str && str.length) filters.push([`str:"${str}"`]);
+  if (!!region) filters.push([`regionId:${decodeId(region.id)}`])
+  if (!!district) filters.push([`districtId:${decodeId(district.id)}`])
   let payload = formatPageQuery("healthFacilitiesStr",
-    !!str && str.length && [`str:"${str}"`],
+    filters,
     mm.getRef("location.HealthFacilityPicker.projection")
   );
   return graphql(payload, 'LOCATION_HEALTH_FACILITIES');
-}
-
-export function fetchDistricts(mm, str) {
-  let payload = formatPageQuery("locationsStr",
-    [`tpe: "D"`, !!str && str.length && `str:"${str}"`],
-    mm.getRef("location.DistrictPicker.projection")
-  );
-  return graphql(payload, 'LOCATION_DISTRICTS');
-}
-
-export function fetchRegions(mm, str) {
-  let payload = formatPageQuery("locationsStr",
-    [`tpe: "R"`, !!str && str.length && `str:"${str}"`],
-    mm.getRef("location.RegionPicker.projection")
-  );
-  return graphql(payload, 'LOCATION_REGIONS');
 }

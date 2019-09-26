@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { fetchUserHealthFacilityFullPath } from "../actions";
 import { withModulesManager } from "@openimis/fe-core";
 
-class UserHealthFacility extends Component {
+class UserHealthFacilityLoader extends Component {
     componentDidMount() {
         if (!!this.props.user.health_facility_id) {
             this.props.fetchUserHealthFacilityFullPath(
@@ -27,4 +27,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(UserHealthFacility));
+export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(UserHealthFacilityLoader));

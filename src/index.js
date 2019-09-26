@@ -1,5 +1,6 @@
 import React from "react";
-import UserHealthFacility from "./components/UserHealthFacility";
+import UserHealthFacilityLoader from "./components/UserHealthFacilityLoader";
+import UserDistrictsLoader from "./components/UserDistrictsLoader";
 import HealthFacilityFullPath from "./components/HealthFacilityFullPath";
 import HealthFacilityPicker from "./pickers/HealthFacilityPicker";
 import HealthFacilityLevelPicker from "./pickers/HealthFacilityLevelPicker";
@@ -14,16 +15,15 @@ const DEFAULT_CONFIG = {
   "refs": [
     { key: "location.HealthFacilityFullPath", ref: HealthFacilityFullPath },
     { key: "location.HealthFacilityPicker", ref: HealthFacilityPicker },
-    { key: "location.HealthFacilityPicker.projection", ref: ["id", "code", "name"] },
+    { key: "location.HealthFacilityPicker.projection", ref: ["id", "code", "name", "level", "servicePricelist{id}", "itemPricelist{id}", "location{id, code, name, parent{id, code, name}}"] },
     { key: "location.HealthFacilityLevelPicker", ref: HealthFacilityLevelPicker },
     { key: "location.HealthFacilityLevelPicker.projection", ref: null },
     { key: "location.RegionPicker", ref: RegionPicker },
-    { key: "location.RegionPicker.projection", ref: ["id", "code", "name"] },
     { key: "location.DistrictPicker", ref: DistrictPicker },
-    { key: "location.DistrictPicker.projection", ref: ["id", "code", "name"] },
+    { key: "location.HealthFacilityGQLType", ref: "HealthFacilityGQLType"},
+    { key: "location.LocationGQLType", ref: "LocationGQLType"},
   ],
-  "core.Boot": [UserHealthFacility],
-  "location.HealthFacilityGQLType": "HealthFacilityGQLType"
+  "core.Boot": [UserHealthFacilityLoader, UserDistrictsLoader],
 }
 
 export const LocationModule = (cfg) => {

@@ -18,7 +18,7 @@ class HealthFacilityPicker extends Component {
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
-        this.props.fetchHealthFacilities(this.props.modulesManager, str);
+        this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, str);
 
     debouncedGetSuggestion = _debounce(
         this.getSuggestions,
@@ -28,7 +28,7 @@ class HealthFacilityPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, healthFacilityLabel(v));
 
     render() {
-        const { intl, value, healthFacilities, withLabel = true, label, readOnly = false } = this.props;
+        const { intl, value, reset, healthFacilities, withLabel = true, label, readOnly = false } = this.props;
         return <AutoSuggestion
             items={healthFacilities}
             label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
@@ -38,6 +38,7 @@ class HealthFacilityPicker extends Component {
             getSuggestionValue={healthFacilityLabel}
             onSuggestionSelected={this.onSuggestionSelected}
             value={value}
+            reset={reset}
             readOnly={readOnly}
         />
     }

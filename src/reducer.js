@@ -6,23 +6,28 @@ function reducer(
         fetchingHealthFacilityFullPath: false,
         fetchedHealthFacilityFullPath: false,
         healthFacilityFullPath: null,
-        errorHealthFacilityFullPath: null,   
+        errorHealthFacilityFullPath: null,
         fetchingHealthFacilities: false,
         fetchedHealthFacilities: false,
         healthFacilities: null,
-        errorHealthFacilities: null,    
-        fetchingRegions: false,
-        fetchedRegions: false,
-        regions: null,
-        errorRegions: null,   
-        fetchingDistricts: false,
-        fetchedDistricts: false,
-        districts: null,
-        errorDistricts: null,                                     
+        errorHealthFacilities: null,
     },
     action,
 ) {
     switch (action.type) {
+        case 'LOCATION_USER_DISTRICTS_RESP':
+            let userDistricts = action.payload.data.userDistricts || [];
+            let userRegions = userDistricts.reduce(
+                (res, d) => {
+                    res[d.regionId] = { id: d.regionId, code: d.regionCode, name: d.regionName };
+                    return res;
+                }
+                , {})
+            return {
+                ...state,
+                userRegions: Object.values(userRegions),
+                userDistricts,
+            }
         case 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH_RESP':
             let hfFullPath = parseData(action.payload.data.healthFacilities)[0];
             return {
@@ -45,7 +50,7 @@ function reducer(
                 ...state,
                 fetchingHealthFacilityFullPath: true,
                 fetchedHealthFacilityFullPath: false,
-                healthFacilityFullPath: action.payload.data.healthFacilityFullPath,
+                healthFacilityFullPath: parseData(action.payload.data.healthFacilities)[0],
                 errorHealthFacilityFullPath: formatGraphQLError(action.payload)
             };
         case 'LOCATION_HEALTH_FACILITY_FULL_PATH_ERR':
@@ -98,28 +103,6 @@ function reducer(
                 fetchingRegions: false,
                 errorRegions: formatServerError(action.payload)
             };
-        case 'LOCATION_DISTRICTS_REQ':
-            return {
-                ...state,
-                fetchingDistricts: true,
-                fetchedDistricts: false,
-                districts: null,
-                errorDistricts: null,
-            };
-        case 'LOCATION_DISTRICTS_RESP':
-            return {
-                ...state,
-                fetchingDistricts: true,
-                fetchedDistricts: false,
-                districts: parseData(action.payload.data.locationsStr),
-                errorDistricts: formatGraphQLError(action.payload)
-            };
-        case 'LOCATION_DISTRICTS_ERR':
-            return {
-                ...state,
-                fetchingDistricts: false,
-                errorDistricts: formatServerError(action.payload)
-            };                            
         default:
             return state;
     }
