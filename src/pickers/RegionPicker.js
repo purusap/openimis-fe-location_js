@@ -19,9 +19,16 @@ class RegionPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, this.formatSuggestion(v));
 
     render() {
-        const { intl, value, reset, regions, withLabel = true, label, withPlaceholder, placeholder, readOnly = false } = this.props;
+        const { intl, value, reset, regions,
+            withLabel = true, label,
+            preValues = [],
+            withPlaceholder, placeholder = null,
+            readOnly = false
+        } = this.props;
+
         return <AutoSuggestion
             items={regions}
+            preValues={preValues}
             label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
             placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "RegionPicker.placehoder") : null}
             lookup={this.formatSuggestion}
@@ -36,7 +43,7 @@ class RegionPicker extends Component {
 }
 
 const mapStateToProps = state => ({
-    regions: state.loc.userRegions,
+    regions: state.loc.userRegions || [],
 });
 
 export default withModulesManager(connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(RegionPicker)))));
