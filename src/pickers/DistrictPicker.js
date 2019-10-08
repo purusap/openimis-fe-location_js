@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
-import { withModulesManager, formatMessage, AutoSuggestion, decodeId } from "@openimis/fe-core";
+import { withModulesManager, formatMessage, AutoSuggestion } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
 
 const styles = theme => ({
@@ -21,9 +21,8 @@ class DistrictPicker extends Component {
         const { intl, value, reset, withLabel = true, label, region, districts, readOnly = false } = this.props;
         let items = districts || [];
         if (!!region) {
-            let regionId = parseInt(decodeId(region.id));
             items = items.filter(d => {
-                return d.regionId === regionId
+                return d.regionUuid === region.uuid
             });
         }
         return (

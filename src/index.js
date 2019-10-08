@@ -15,7 +15,7 @@ const DEFAULT_CONFIG = {
   "refs": [
     { key: "location.HealthFacilityFullPath", ref: HealthFacilityFullPath },
     { key: "location.HealthFacilityPicker", ref: HealthFacilityPicker },
-    { key: "location.HealthFacilityPicker.projection", ref: ["id", "code", "name", "level", "servicePricelist{id}", "itemPricelist{id}", "location{id, code, name, parent{id, code, name}}"] },
+    { key: "location.HealthFacilityPicker.projection", ref: ["id", "uuid", "code", "name", "level", "servicePricelist{id, uuid}", "itemPricelist{id, uuid}", "location{id, uuid, code, name, parent{id, uuid, code, name}}"] },
     { key: "location.HealthFacilityLevelPicker", ref: HealthFacilityLevelPicker },
     { key: "location.HealthFacilityLevelPicker.projection", ref: null },
     { key: "location.RegionPicker", ref: RegionPicker },

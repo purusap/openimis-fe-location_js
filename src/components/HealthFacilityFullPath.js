@@ -42,12 +42,12 @@ class HealthFacilityFullPath extends Component {
                     <Fragment>
                         <Grid item xs={2}><FieldLabel module="location" id="HealthFacilityFullPath.region" /></Grid>
                         <ControlledField module="location" id="HealthFacilityFullPath.region.code" field={(
-                            <Grid item xs={modulesManager.skipControl("location", "HealthFacilityFullPath.region.name") ? 10 : 3}>
+                            <Grid item xs={modulesManager.hideField("location", "HealthFacilityFullPath.region.name") ? 10 : 3}>
                                 {healthFacilityFullPath.location.parent.code}
                             </Grid>
                         )} />
                         <ControlledField module="location" id="HealthFacilityFullPath.region.name" field={(
-                            <Grid item xs={modulesManager.skipControl("location", "HealthFacilityFullPath.region.code") ? 10 : 7}>
+                            <Grid item xs={modulesManager.hideField("location", "HealthFacilityFullPath.region.code") ? 10 : 7}>
                                 {healthFacilityFullPath.location.parent.name}
                             </Grid>
                         )} />
@@ -57,12 +57,12 @@ class HealthFacilityFullPath extends Component {
                     <Fragment>
                         <Grid item xs={2}><FieldLabel module="location" id="HealthFacilityFullPath.district" /></Grid>
                         <ControlledField module="location" id="HealthFacilityFullPath.district.code" field={(
-                            <Grid item xs={modulesManager.skipControl("location", "HealthFacilityFullPath.district.name") ? 10 : 3}>
+                            <Grid item xs={modulesManager.hideField("location", "HealthFacilityFullPath.district.name") ? 10 : 3}>
                                 {healthFacilityFullPath.location.code}
                             </Grid>
                         )} />
                         <ControlledField module="location" id="HealthFacilityFullPath.district.name" field={(
-                            <Grid item xs={modulesManager.skipControl("location", "HealthFacilityFullPath.dictrict.code") ? 10 : 7}>
+                            <Grid item xs={modulesManager.hideField("location", "HealthFacilityFullPath.dictrict.code") ? 10 : 7}>
                                 {healthFacilityFullPath.location.name}
                             </Grid>
                         )} />
@@ -72,7 +72,7 @@ class HealthFacilityFullPath extends Component {
                     <Fragment>
                         <Grid item xs={2}><FieldLabel module="location" id="HealthFacilityFullPath.healthFacility" /></Grid>
                         <ControlledField module="location" id="HealthFacilityFullPath.healthFacility.code" field={(
-                            <Grid item xs={modulesManager.skipControl("location", "HealthFacilityFullPath.healthFacility.nameAndLevel") ? 10 : 3}>
+                            <Grid item xs={modulesManager.hideField("location", "HealthFacilityFullPath.healthFacility.nameAndLevel") ? 10 : 3}>
                                 {healthFacilityFullPath.code}
                             </Grid>
                         )} />

@@ -3,8 +3,8 @@ import { graphql, decodeId, formatQuery, formatPageQuery, encodeId } from "@open
 export function fetchUserDistricts() {
   let payload = formatQuery("userDistricts",
     null,
-    ["id", "code", "name",
-      "regionId", "regionCode", "regionName"]
+    ["id", "uuid", "code", "name",
+      "regionId", "regionUuid", "regionCode", "regionName"]
   );
   return graphql(payload, 'LOCATION_USER_DISTRICTS');
 }
@@ -28,8 +28,8 @@ export function fetchHealthFacilityFullPath(mm, id) {
 export function fetchHealthFacilities(mm, region, district, str) {
   let filters = [];
   if (!!str && str.length) filters.push([`str:"${str}"`]);
-  if (!!region) filters.push([`regionId:${decodeId(region.id)}`])
-  if (!!district) filters.push([`districtId:${decodeId(district.id)}`])
+  if (!!region) filters.push([`regionUuid: "${region.uuid}"`])
+  if (!!district) filters.push([`districtUuid:"${district.uuid}"`])
   let payload = formatPageQuery("healthFacilitiesStr",
     filters,
     mm.getRef("location.HealthFacilityPicker.projection")

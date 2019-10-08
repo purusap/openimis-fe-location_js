@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
 import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";

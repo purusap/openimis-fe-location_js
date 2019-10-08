@@ -19,7 +19,7 @@ function reducer(
             let userDistricts = action.payload.data.userDistricts || [];
             let userRegions = userDistricts.reduce(
                 (res, d) => {
-                    res[d.regionId] = { id: d.regionId, code: d.regionCode, name: d.regionName };
+                    res[d.regionUuid] = { id: d.regionId, uuid: d.regionUuid, code: d.regionCode, name: d.regionName };
                     return res;
                 }
                 , {})
