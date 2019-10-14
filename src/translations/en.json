@@ -1,5 +1,13 @@
 {
     "location.HealthFacilityFullPath.region": "Region",
     "location.HealthFacilityFullPath.district": "District",
-    "location.HealthFacilityFullPath.healthFacility": "HF"
+    "location.HealthFacilityFullPath.healthFacility": "HF",
+    "location.RegionPicker.label": "Region",
+    "location.DistrictPicker.label": "District",
+    "location.HealthFacilityPicker.label": "Health Facility",
+    "location.healthFacilityLevel": "Health Facility Level",
+    "location.healthFacilityLevel.null": "Any",
+    "location.healthFacilityLevel.C": "Health Center",
+    "location.healthFacilityLevel.D": "Dispensary",
+    "location.healthFacilityLevel.H": "Hospital"
 }

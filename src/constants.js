@@ -1,0 +1,1 @@
+export const HEALTH_FACILITY_LEVELS = ["C", "D", "H"]
