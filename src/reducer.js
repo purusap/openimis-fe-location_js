@@ -33,9 +33,6 @@ function reducer(
             return {
                 ...state,
                 userHealthFacilityFullPath: hfFullPath,
-                userHealthFacilityStr: healthFacilityLabel(hfFullPath),
-                userRegionStr: locationLabel(hfFullPath.location.parent),
-                userDistrictStr: locationLabel(hfFullPath.location),
             }
         case 'LOCATION_HEALTH_FACILITY_FULL_PATH_REQ':
             return {
@@ -80,28 +77,6 @@ function reducer(
                 ...state,
                 fetchingHealthFacilities: false,
                 errorHealthFacilities: formatServerError(action.payload)
-            };
-        case 'LOCATION_REGIONS_REQ':
-            return {
-                ...state,
-                fetchingRegions: true,
-                fetchedRegions: false,
-                regions: null,
-                errorRegions: null,
-            };
-        case 'LOCATION_REGIONS_RESP':
-            return {
-                ...state,
-                fetchingRegions: true,
-                fetchedRegions: false,
-                regions: parseData(action.payload.data.locationsStr),
-                errorRegions: formatGraphQLError(action.payload)
-            };
-        case 'LOCATION_REGIONS_ERR':
-            return {
-                ...state,
-                fetchingRegions: false,
-                errorRegions: formatServerError(action.payload)
             };
         default:
             return state;

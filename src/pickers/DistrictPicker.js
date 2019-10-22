@@ -4,6 +4,7 @@ import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
 import { withModulesManager, formatMessage, AutoSuggestion } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
+import { locationLabel } from "../utils";
 
 const styles = theme => ({
     label: {
@@ -13,9 +14,7 @@ const styles = theme => ({
 
 class DistrictPicker extends Component {
 
-    formatSuggestion = a => !!a ? `${a.code} ${a.name}` : '';
-
-    onSuggestionSelected = v => this.props.onChange(v, this.formatSuggestion(v));
+    onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
 
     render() {
         const { intl, value, reset, withLabel = true, label, region, districts, readOnly = false } = this.props;
@@ -29,9 +28,9 @@ class DistrictPicker extends Component {
             <AutoSuggestion
                 items={items}
                 label={!!withLabel && (label || formatMessage(intl, "location", "DistrictPicker.label"))}
-                lookup={this.formatSuggestion}
-                getSuggestionValue={this.formatSuggestion}
-                renderSuggestion={a => <span>{this.formatSuggestion(a)}</span>}
+                lookup={locationLabel}
+                getSuggestionValue={locationLabel}
+                renderSuggestion={a => <span>{locationLabel(a)}</span>}
                 onSuggestionSelected={this.onSuggestionSelected}
                 value={value}
                 reset={reset}
