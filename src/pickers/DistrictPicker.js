@@ -17,7 +17,8 @@ class DistrictPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
 
     render() {
-        const { intl, value, reset, withLabel = true, label, region, districts, readOnly = false } = this.props;
+        const { intl, value, reset, withLabel = true, label, region, districts,
+            readOnly = false, required = false } = this.props;
         let items = districts || [];
         if (!!region) {
             items = items.filter(d => {
@@ -35,6 +36,7 @@ class DistrictPicker extends Component {
                 value={value}
                 reset={reset}
                 readOnly={readOnly}
+                required = {required}
             />
         )
     }

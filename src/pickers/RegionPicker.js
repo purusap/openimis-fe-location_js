@@ -21,7 +21,7 @@ class RegionPicker extends Component {
             withLabel = true, label,
             preValues = [],
             withPlaceholder, placeholder = null,
-            readOnly = false
+            readOnly = false, required = false
         } = this.props;
 
         return <AutoSuggestion
@@ -36,6 +36,7 @@ class RegionPicker extends Component {
             value={value}
             reset={reset}
             readOnly={readOnly}
+            required={required}
         />
     }
 }
