@@ -1,4 +1,4 @@
-import { graphql, decodeId, formatQuery, formatPageQuery, encodeId } from "@openimis/fe-core";
+import { graphql, formatQuery, formatPageQuery } from "@openimis/fe-core";
 
 export function fetchUserDistricts() {
   let payload = formatQuery("userDistricts",

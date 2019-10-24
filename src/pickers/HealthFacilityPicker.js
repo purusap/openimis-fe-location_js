@@ -28,7 +28,8 @@ class HealthFacilityPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, healthFacilityLabel(v));
 
     render() {
-        const { intl, value, reset, healthFacilities, withLabel = true, label, readOnly = false } = this.props;
+        const { intl, value, reset, healthFacilities, withLabel = true, label,
+            readOnly = false, required = false } = this.props;
         return <AutoSuggestion
             items={healthFacilities}
             label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
@@ -40,6 +41,7 @@ class HealthFacilityPicker extends Component {
             value={value}
             reset={reset}
             readOnly={readOnly}
+            required = {required}
         />
     }
 }
