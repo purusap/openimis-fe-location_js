@@ -1,5 +1,5 @@
 import {
-    formatServerError, formatGraphQLError, parseData, pageInfo,
+    formatServerError, formatGraphQLError, parseData, pageInfo, decodeId,
     dispatchMutationReq, dispatchMutationResp, dispatchMutationErr
 } from '@openimis/fe-core';
 
@@ -44,7 +44,7 @@ function reducer(
             let userL1s = action.payload.data.userDistricts || [];
             let userL0s = userL1s.reduce(
                 (res, d) => {
-                    res[d.regionUuid] = { id: d.regionId, uuid: d.regionUuid, code: d.regionCode, name: d.regionName };
+                    res[d.parent.uuid] = d.parent;
                     return res;
                 }
                 , {})
@@ -54,10 +54,9 @@ function reducer(
                 userL1s,
             }
         case 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH_RESP':
-            let hfFullPath = parseData(action.payload.data.healthFacilities)[0];
             return {
                 ...state,
-                userHealthFacilityFullPath: hfFullPath,
+                userHealthFacilityFullPath: parseData(action.payload.data.healthFacilities)[0],
             }
         case 'LOCATION_HEALTH_FACILITY_FULL_PATH_REQ':
             return {

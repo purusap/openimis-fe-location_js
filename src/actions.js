@@ -8,7 +8,7 @@ export function fetchUserDistricts() {
   let payload = formatQuery("userDistricts",
     null,
     ["id", "uuid", "code", "name",
-      "regionId", "regionUuid", "regionCode", "regionName"]
+      "parent{id, uuid, code, name}"]
   );
   return graphql(payload, 'LOCATION_USER_DISTRICTS');
 }

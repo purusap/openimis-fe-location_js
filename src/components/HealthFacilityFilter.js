@@ -68,10 +68,10 @@ class HealthFacilityFilter extends Component {
         if (!!v) {
             filters.push(
                 this._regionFilter({
-                    id: v.regionId,
-                    uuid: v.regionUuid,
-                    code: v.regionCode,
-                    name: v.regionName
+                    id: v.parent.id,
+                    uuid: v.parent.uuid,
+                    code: v.parent.code,
+                    name: v.parent.name
                 }))
         }
         this.props.onChangeFilters(filters);
@@ -132,6 +132,7 @@ class HealthFacilityFilter extends Component {
                     <PublishedComponent
                         id="location.RegionPicker"
                         value={(filters['region'] && filters['region']['value'])}
+                        withNull={true}
                         onChange={this._onChangeRegion}
                     />
                 </Grid>

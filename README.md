@@ -34,5 +34,7 @@ None
 * `state.core.user`, to access user info (rights,...)
 
 ## Configurations Options
-* `healthFacilitiesMinCharLookup`: minimum characters to type before triggering search in `location.HealthFacilityPicker`
-* `debounceTime`: debounce time to wait before triggering search in `location.HealthFacilityPicker`
+* `healthFacilitiesMinCharLookup`: minimum characters to type before triggering search in `location.HealthFacilityPicker`, Default: 2
+* `debounceTime`: debounce time to wait before triggering search in `location.HealthFacilityPicker`, Default: 800 ms
+* `RegionPicker.selectThreshold`: region suggestions count threshold under which the AutoSuggestion switch to a SelectInut (drop down list), efault: 10
+* `DistrictPicker.selectThreshold`: district suggestions count threshold under which the AutoSuggestion switch to a SelectInut (drop down list), efault: 10

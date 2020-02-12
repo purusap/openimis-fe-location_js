@@ -25,15 +25,15 @@ class HealthFacilityMasterPanel extends FormPanel {
     formatDistrict = district => {
         let d = { ...district };
         d.parent = {
-            id: d.regiondId,
-            uuid: d.regionUuid,
-            code: d.regionCode,
-            name: d.regionName
+            id: d.parent.id,
+            uuid: d.parent.uuid,
+            code: d.parent.code,
+            name: d.parent.name
         };
-        delete d.regionId;
-        delete d.regionUuid;
-        delete d.regionCode;
-        delete d.regionName;
+        delete d.parent.id;
+        delete d.parent.uuid;
+        delete d.parent.code;
+        delete d.parent.name;
         return d;
     }
 
@@ -77,6 +77,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                         <PublishedComponent
                             id="location.RegionPicker"
                             value={this.state.parentLocation}
+                            withNull={true}
                             readOnly={readOnly}
                             onChange={(v, s) => this.setState(
                                 { parentLocation: v },
