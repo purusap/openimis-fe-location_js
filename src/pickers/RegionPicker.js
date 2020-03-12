@@ -28,36 +28,25 @@ class RegionPicker extends Component {
             withPlaceholder, placeholder = null,
             readOnly = false, required = false
         } = this.props;
-        if (!value && regions.length < this.selectThreshold) {
-            var options = [...preValues, ...regions].map(r => ({ value: r, label: locationLabel(r)}));
-            if (withNull) {
-                options.unshift({ value: null, label: nullLabel || formatMessage(intl, "location", "location.RegionPicker.null")})
-            }
-            return <SelectInput
-                module={"location"}
-                strLabel={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
-                options={options}
-                value={value}
-                onChange={this.onSuggestionSelected}
-                readOnly={readOnly}
-                required={required}
-            />
-        } else {
-            return <AutoSuggestion
-                items={regions}
-                preValues={preValues}
-                label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
-                placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "RegionPicker.placehoder") : null}
-                lookup={locationLabel}
-                renderSuggestion={a => <span>{locationLabel(a)}</span>}
-                getSuggestionValue={locationLabel}
-                onSuggestionSelected={this.onSuggestionSelected}
-                value={value}
-                reset={reset}
-                readOnly={readOnly}
-                required={required}
-            />
-        }
+        return <AutoSuggestion
+            module="location"
+            items={regions}
+            preValues={preValues}
+            label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
+            placeholder={!!withPlaceholder ? placeholder || formatMessage(intl, "location", "RegionPicker.placehoder") : null}
+            lookup={locationLabel}
+            renderSuggestion={a => <span>{locationLabel(a)}</span>}
+            getSuggestionValue={locationLabel}
+            onSuggestionSelected={this.onSuggestionSelected}
+            value={value}
+            reset={reset}
+            readOnly={readOnly}
+            required={required}
+            selectThreshold={this.selectThreshold}
+            withNull={withNull}
+            nullLabel={nullLabel || formatMessage(intl, "location", "location.RegionPicker.null")}
+            selectLabel={locationLabel}            
+        />
     }
 }
 
