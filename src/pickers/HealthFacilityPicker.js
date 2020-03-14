@@ -61,7 +61,6 @@ class HealthFacilityPicker extends Component {
             selectThreshold={this.selectThreshold}
             withNull={withNull}
             nullLabel={nullLabel || formatMessage(intl, "location", "location.HealthFacilityPicker.null")}
-            selectLabel={healthFacilityLabel}
         />
     }
 }

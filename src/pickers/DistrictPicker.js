@@ -48,7 +48,6 @@ class DistrictPicker extends Component {
                 selectThreshold={this.selectThreshold}
                 withNull={withNull}
                 nullLabel={nullLabel || formatMessage(intl, "location", "location.DistrictPicker.null")}
-                selectLabel={locationLabel}
             />
         )
     }

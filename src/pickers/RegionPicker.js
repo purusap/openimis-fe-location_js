@@ -45,7 +45,6 @@ class RegionPicker extends Component {
             selectThreshold={this.selectThreshold}
             withNull={withNull}
             nullLabel={nullLabel || formatMessage(intl, "location", "location.RegionPicker.null")}
-            selectLabel={locationLabel}            
         />
     }
 }
