@@ -22,31 +22,14 @@ class HealthFacilityMasterPanel extends FormPanel {
         this.codeMaxLength = props.modulesManager.getConf("fe-location", "healthFacilityForm.codeMaxLength", 8);
     }
 
-    formatDistrict = district => {
-        let d = { ...district };
-        d.parent = {
-            id: d.parent.id,
-            uuid: d.parent.uuid,
-            code: d.parent.code,
-            name: d.parent.name
-        };
-        delete d.parent.id;
-        delete d.parent.uuid;
-        delete d.parent.code;
-        delete d.parent.name;
-        return d;
-    }
-
-
     updateDistrict = district => {
         if (!district) {
             this.updateAttribute('location', null);
             return;
         }
-        let d = this.formatDistrict(district)
         this.setState(
-            { parentLocation: d.parent },
-            e => this.updateAttribute('location', d)
+            { parentLocation: district.parent },
+            e => this.updateAttribute('location', district)
         )
     }
 
