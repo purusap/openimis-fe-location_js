@@ -9,6 +9,7 @@ const styles = theme => ({
 });
 
 class HealthFacilityPriceListsPanel extends FormPanel {
+
     render() {
         const { classes, edited, readOnly } = this.props;
         return (
@@ -22,7 +23,7 @@ class HealthFacilityPriceListsPanel extends FormPanel {
                                 nullLabel="empty"
                                 readOnly={readOnly}
                                 required={true}
-                                region={!!edited.location ? edited.location.parent : null}
+                                region={edited.parentLocation}
                                 district={edited.location}
                                 onChange={v => this.updateAttribute("servicesPricelist", v)}
                             />
@@ -36,7 +37,7 @@ class HealthFacilityPriceListsPanel extends FormPanel {
                                 nullLabel="empty"
                                 readOnly={readOnly}
                                 required={true}
-                                region={!!edited.location ? edited.location.parent : null}
+                                region={edited.parentLocation}
                                 district={edited.location}
                                 onChange={v => this.updateAttribute("itemsPricelist", v)}
                             />

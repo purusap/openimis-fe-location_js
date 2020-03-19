@@ -50,7 +50,11 @@ class HealthFacilityForm extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.fetchedHealthFacility !== this.props.fetchedHealthFacility && !!this.props.fetchedHealthFacility) {
             this.setState(
-                { healthFacility: this.props.healthFacility, healthFacility_uuid: this.props.healthFacility.uuid, lockNew: false },
+                {
+                    healthFacility: { ...this.props.healthFacility, parentLocation: this.props.healthFacility.location.parent },
+                    healthFacility_uuid: this.props.healthFacility.uuid,
+                    lockNew: false
+                },
             );
         } else if (prevProps.healthFacility_uuid && !this.props.healthFacility_uuid) {
             this.setState({ healthFacility: this._newHealthFacility(), lockNew: false, healthFacility_uuid: null });
@@ -117,7 +121,7 @@ class HealthFacilityForm extends Component {
             doIt: e => this.reload(healthFacility_uuid),
             icon: <ReplayIcon />,
             onlyIfDirty: !readOnly
-        }]        
+        }]
         return (
             <Fragment>
                 <ProgressOrError progress={fetchingHealthFacility} error={errorHealthFacility} />

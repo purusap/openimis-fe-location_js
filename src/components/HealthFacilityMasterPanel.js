@@ -13,42 +13,27 @@ const styles = theme => ({
 
 class HealthFacilityMasterPanel extends FormPanel {
 
-    state = {
-        parentLocation: null,
-    }
-
     constructor(props) {
         super(props);
         this.codeMaxLength = props.modulesManager.getConf("fe-location", "healthFacilityForm.codeMaxLength", 8);
     }
 
+    updateRegion = region => {
+        this.updateAttributes({
+            parentLocation: region,
+            location: null,
+            servicesPricelist: null,
+            itemsPricelist: null,
+        });
+    }
+
     updateDistrict = district => {
-        if (!district) {
-            this.updateAttribute('location', null);
-            return;
-        }
-        this.setState(
-            { parentLocation: district.parent },
-            e => this.updateAttribute('location', district)
-        )
-    }
-
-    componentDidMount() {
-        if (!!this.props.edited && !!this.props.edited.location) {
-            this.setState({ parentLocation: this.props.edited.location.parent })
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this._componentDidUpdate(prevProps, prevState, snapshot)) return;
-        if ((!this.state.parentLocation && !!this.props.edited && !!this.props.edited.location) ||
-            (!!this.state.parentLocation &&
-                !!this.props.edited && this.props.edited.location &&
-                ((!this.props.edited || !this.props.edited.location) ||
-                    this.state.parentLocation.id !== this.props.edited.location.parent.id))
-        ) {
-            this.setState({ parentLocation: this.props.edited.location.parent })
-        }
+        this.updateAttributes({
+            parentLocation: !!district ? district.parent : null,
+            location: district,
+            servicesPricelist: null,
+            itemsPricelist: null
+        })
     }
 
     render() {
@@ -59,12 +44,10 @@ class HealthFacilityMasterPanel extends FormPanel {
                     <Grid item xs={2} className={classes.item}>
                         <PublishedComponent
                             id="location.RegionPicker"
-                            value={this.state.parentLocation}
+                            value={edited.parentLocation}
                             withNull={true}
                             readOnly={readOnly}
-                            onChange={(v, s) => this.setState(
-                                { parentLocation: v },
-                                e => this.updateDistrict(null))}
+                            onChange={(v, s) => this.updateRegion(v)}
                         />
                     </Grid>
                 } />
@@ -102,7 +85,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             reset={reset}
                             readOnly={readOnly}
                             required={true}
-                            onChange={(v, s) => this.updateAttribute("level", v, s)}
+                            onChange={(v, s) => this.updateAttribute("level", v)}
                         />
                     </Grid>
                 } />
@@ -127,7 +110,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             reset={reset}
                             readOnly={readOnly}
                             required={true}
-                            onChange={(v, s) => this.updateAttribute("careType", v, s)}
+                            onChange={(v, s) => this.updateAttribute("careType", v)}
                         />
                     </Grid>
                 } />
@@ -139,7 +122,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             value={edited.code}
                             readOnly={readOnly}
                             required={true}
-                            onChange={(v, s) => this.updateAttribute("code", v, s)}
+                            onChange={(v, s) => this.updateAttribute("code", v)}
                             inputProps={{
                                 "maxLength": this.codeMaxLength,
                             }}
@@ -154,7 +137,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             value={edited.name}
                             readOnly={readOnly}
                             required={true}
-                            onChange={(v, s) => this.updateAttribute("name", v, s)}
+                            onChange={(v, s) => this.updateAttribute("name", v)}
                         />
                     </Grid>
                 } />
@@ -164,7 +147,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                         value={edited.address}
                         rows="2"
                         readOnly={readOnly}
-                        onChange={(v, s) => this.updateAttribute("address", v, s)}
+                        onChange={(v, s) => this.updateAttribute("address", v)}
                     />
                 </Grid>
                 <ControlledField module="location" id="HealthFacility.phone" field={
@@ -174,7 +157,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             name="phone"
                             value={edited.phone}
                             readOnly={readOnly}
-                            onChange={(v, s) => this.updateAttribute("phone", v, s)}
+                            onChange={(v, s) => this.updateAttribute("phone", v)}
                         />
                     </Grid>
                 } />
@@ -185,7 +168,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             name="fax"
                             value={edited.fax}
                             readOnly={readOnly}
-                            onChange={(v, s) => this.updateAttribute("fax", v, s)}
+                            onChange={(v, s) => this.updateAttribute("fax", v)}
                         />
                     </Grid>
                 } />
@@ -196,7 +179,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                             name="email"
                             value={edited.email}
                             readOnly={readOnly}
-                            onChange={(v, s) => this.updateAttribute("email", v, s)}
+                            onChange={(v, s) => this.updateAttribute("email", v)}
                         />
                     </Grid>
                 } />
