@@ -6,6 +6,7 @@ import ReplayIcon from "@material-ui/icons/Replay"
 import {
     Contributions, ProgressOrError, Form,
     withModulesManager, withHistory, journalize,
+    formatMessageWithValues,
 } from "@openimis/fe-core";
 import HealthFacilityMasterPanel from "../components/HealthFacilityMasterPanel";
 import HealthFacilityCatchmentPanel from "../components/HealthFacilityCatchmentPanel";
@@ -48,6 +49,9 @@ class HealthFacilityForm extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.healthFacility.code !== this.state.healthFacility.code) {
+            document.title = formatMessageWithValues(this.props.intl, "location", "healthFacility.edit.page.title", { code: this.state.healthFacility.code })
+        }
         if (prevProps.fetchedHealthFacility !== this.props.fetchedHealthFacility && !!this.props.fetchedHealthFacility) {
             this.setState(
                 {

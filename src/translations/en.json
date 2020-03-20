@@ -1,4 +1,7 @@
 {
+    "location.locations.page.title": "Locations",
+    "location.healthFacilities.page.title": "Health Facilities",
+    "location.healthFacility.edit.page.title": "HF {code}",
     "location.HealthFacilityFullPath.region": "Region",
     "location.HealthFacilityFullPath.district": "District",
     "location.HealthFacilityFullPath.healthFacility": "HF",

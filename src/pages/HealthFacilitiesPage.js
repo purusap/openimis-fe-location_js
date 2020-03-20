@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { withHistory, historyPush } from "@openimis/fe-core";
+import { withHistory, historyPush, formatMessage } from "@openimis/fe-core";
 import HealthFacilitiesSearcher from "../components/HealthFacilitiesSearcher";
 
 import { RIGHT_HEALTH_FACILITY_ADD } from "../constants";
@@ -15,6 +15,10 @@ const styles = theme => ({
 });
 
 class HealthFacilitiesPage extends Component {
+
+    componentDidMount() {
+        document.title = formatMessage(this.props.intl, "location", "healthFacilities.page.title")
+    }
 
     onAdd = () => {
         historyPush(this.props.modulesManager, this.props.history, "location.route.healthFacilityEdit");

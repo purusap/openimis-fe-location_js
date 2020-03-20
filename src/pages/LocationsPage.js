@@ -8,7 +8,7 @@ import {
     fetchLocations, clearLocations,
     createOrUpdateLocation, deleteLocation, moveLocation
 } from "../actions";
-import { withModulesManager, formatMessageWithValues, journalize } from "@openimis/fe-core";
+import { withModulesManager, formatMessageWithValues, journalize, formatMessage } from "@openimis/fe-core";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import _ from "lodash";
 
@@ -46,6 +46,7 @@ class LocationsPage extends Component {
     }
 
     componentDidMount() {
+        document.title = formatMessage(this.props.intl, "location", "location.locations.page.title")
         this.props.fetchLocations(this.locationTypes, 0, null)
     }
 
