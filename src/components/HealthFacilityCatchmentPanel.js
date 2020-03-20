@@ -122,7 +122,7 @@ class HealthFacilityCatchmentPanel extends FormPanel {
     }
 
     updateCatchments = (locationId, value) => {
-        let catchments = [...this.props.edited.catchments];
+        let catchments = !!this.props.edited.catchments ? [...this.props.edited.catchments] : [];
         for (let idx in catchments) {
             if (catchments[idx].location.id === locationId) {
                 catchments[idx].catchment = value;
