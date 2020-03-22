@@ -181,6 +181,7 @@ class HealthFacilitiesSearcher extends Component {
                     rowsPerPageOptions={this.rowsPerPageOptions}
                     defaultPageSize={this.defaultPageSize}
                     fetch={this.props.fetchHealthFacilitySummaries}
+                    cacheFiltersKey="locationHealthFacilitiesSearcher"
                     items={healthFacilities}
                     rowIdentifier={this.rowIdentifier}
                     rowLocked={this.rowLocked}
