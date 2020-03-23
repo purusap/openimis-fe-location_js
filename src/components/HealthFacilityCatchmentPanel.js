@@ -156,7 +156,7 @@ class HealthFacilityCatchmentPanel extends FormPanel {
         const { l0s, l1s, l2s, l3s } = this.state;
         return (
             <Grid container spacing={1} className={classes.item} >
-                <Grid item xs={8}>
+                <Grid item xl={8} lg={12}>
                     <Grid container spacing={1}>
                         <Grid item xs={4}>
                             <TypeLocationsPaper
@@ -211,7 +211,7 @@ class HealthFacilityCatchmentPanel extends FormPanel {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xl={4} lg={12} xs={12}>
                     <TypeLocationsPaper
                         type={3}
                         title={`locations.searcher.title.3.catchments`}

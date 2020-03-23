@@ -9,9 +9,10 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import MoveIcon from '@material-ui/icons/Shuffle';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ReplayIcon from "@material-ui/icons/Replay"
 import {
     formatMessage, formatMessageWithValues,
-    SearcherPane, ProgressOrError, TextInput
+    SearcherPane, ProgressOrError
 } from "@openimis/fe-core";
 import EditLocationDialog from "./EditLocationDialog";
 import MoveLocationDialog from "./MoveLocationDialog";
@@ -121,8 +122,8 @@ class ResultPane extends Component {
                                 key={`location-${type}-${idx}`}
                                 button
                                 selected={location && location.id === l.id}
-                                onClick={e => !!onSelect && onSelect(l)}
-                                onDoubleClick={e => rights.includes(RIGHT_LOCATION_EDIT) && onEdit(l)}
+                                onClick={e => !!l.uuid && !!onSelect && onSelect(l)}
+                                onDoubleClick={e => !!l.uuid && rights.includes(RIGHT_LOCATION_EDIT) && onEdit(l)}
                                 className={!l.uuid ? classes.lockedRow : null}
                             >
                                 <ListItemText>{l.code} - {l.name}</ListItemText>
@@ -177,6 +178,7 @@ class TypeLocationsPaper extends Component {
                     module="location"
                     title={title || `locations.searcher.title.${this.props.type}`}
                     refresh={onRefresh}
+                    SearchIcon={ReplayIcon}
                     actions={actions}
                     readOnly={readOnly}
                     resultsPane={<StyledResultPane

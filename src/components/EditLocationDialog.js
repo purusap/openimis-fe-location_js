@@ -97,6 +97,8 @@ class EditLocationDialog extends Component {
                                         label="EditDialog.male"
                                         value={!!this.state.data ? this.state.data.malePopulation : null}
                                         onChange={v => this.changeData('malePopulation', v)}
+                                        min={0}
+                                        max={999}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -104,7 +106,9 @@ class EditLocationDialog extends Component {
                                         module="location"
                                         label="EditDialog.female"
                                         value={!!this.state.data ? this.state.data.femalePopulation : null}
-                                        onChange={v => this.changeData('femalePopultaion', v)}
+                                        onChange={v => this.changeData('femalePopulation', v)}
+                                        min={0}
+                                        max={999}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -112,7 +116,9 @@ class EditLocationDialog extends Component {
                                         module="location"
                                         label="EditDialog.other"
                                         value={!!this.state.data ? this.state.data.otherPopulation : null}
-                                        onChange={v => this.changeData('otherPopultaion', v)}
+                                        onChange={v => this.changeData('otherPopulation', v)}
+                                        min={0}
+                                        max={999}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -121,6 +127,8 @@ class EditLocationDialog extends Component {
                                         label="EditDialog.family"
                                         value={!!this.state.data ? this.state.data.families : null}
                                         onChange={v => this.changeData('families', v)}
+                                        min={0}
+                                        max={999}
                                     />
                                 </Grid>
                             </Grid>
