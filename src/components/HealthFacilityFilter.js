@@ -27,6 +27,16 @@ class HealthFacilityFilter extends Component {
         showHistory: false,
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (
+            prevProps.filters['showHistory'] !== this.props.filters['showHistory'] &&
+            !!this.props.filters['showHistory'] &&
+            this.state.showHistory !== this.props.filters['showHistory']['value']
+        ) {
+            this.setState({ showHistory: this.props.filters['showHistory']['value'] })
+        }
+    }
+
     debouncedOnChangeFilter = _debounce(
         this.props.onChangeFilters,
         this.props.modulesManager.getConf("fe-location", "debounceTime", 800)
