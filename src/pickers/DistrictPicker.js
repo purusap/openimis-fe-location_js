@@ -2,14 +2,15 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
+import { TextField } from "@material-ui/core";
 import { withModulesManager, formatMessage, AutoSuggestion } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
 import { locationLabel } from "../utils";
 
 const styles = theme => ({
-    label: {
-        color: theme.palette.primary.main
-    }
+    textField: {
+        width: "100%",
+    },
 });
 
 class DistrictPicker extends Component {
@@ -22,16 +23,27 @@ class DistrictPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
 
     render() {
-        const { intl, reset, value,
+        const { intl, classes, userHealthFacilityFullPath, reset, value,
             withLabel = true, label, withNull = false, nullLabel = null,
             region, districts,
             readOnly = false, required = false } = this.props;
+
+        if (!!userHealthFacilityFullPath) {
+            return <TextField
+                label={!!withLabel && (label || formatMessage(intl, "location", "DistrictPicker.label"))}
+                className={classes.textField}
+                disabled
+                value={locationLabel(userHealthFacilityFullPath.location)}
+            />
+        }
+
         let items = districts || [];
         if (!!region) {
             items = items.filter(d => {
                 return d.parent.uuid === region.uuid
             });
         }
+
         return (
             <AutoSuggestion
                 module="location"
@@ -55,6 +67,7 @@ class DistrictPicker extends Component {
 
 const mapStateToProps = state => ({
     districts: state.loc.userL1s,
+    userHealthFacilityFullPath: state.loc.userHealthFacilityFullPath,
 });
 
 export default withModulesManager(connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(DistrictPicker)))));

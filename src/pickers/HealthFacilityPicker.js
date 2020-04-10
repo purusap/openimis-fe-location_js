@@ -5,14 +5,14 @@ import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
 import { fetchHealthFacilities } from "../actions";
 import { formatMessage, AutoSuggestion, SelectInput, withModulesManager } from "@openimis/fe-core";
-import _debounce from "lodash/debounce";
 import { healthFacilityLabel } from "../utils";
 import _ from "lodash";
+import { TextField } from "@material-ui/core";
 
 const styles = theme => ({
-    label: {
-        color: theme.palette.primary.main
-    }
+    textField: {
+        width: "100%",
+    },
 });
 
 class HealthFacilityPicker extends Component {
@@ -23,11 +23,13 @@ class HealthFacilityPicker extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!_.isEqual(prevProps.region, this.props.region)) {
-            this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
-        }
-        if (!_.isEqual(prevProps.district, this.props.district)) {
-            this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+        if (!this.props.userHealthFacilityFullPath) {
+            if (!_.isEqual(prevProps.region, this.props.region)) {
+                this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+            }
+            if (!_.isEqual(prevProps.district, this.props.district)) {
+                this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+            }
         }
     }
 
@@ -35,7 +37,7 @@ class HealthFacilityPicker extends Component {
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
         this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, str);
 
-    debouncedGetSuggestion = _debounce(
+    debouncedGetSuggestion = _.debounce(
         this.getSuggestions,
         this.props.modulesManager.getConf("fe-location", "debounceTime", 800)
     )
@@ -43,8 +45,17 @@ class HealthFacilityPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, healthFacilityLabel(v));
 
     render() {
-        const { intl, value, reset, healthFacilities, withLabel = true, label,
+        const { intl, classes, value, reset, userHealthFacilityFullPath, healthFacilities, withLabel = true, label,
             readOnly = false, required = false, withNull = true, nullLabel = null } = this.props;
+
+        if (!!userHealthFacilityFullPath) {
+            return <TextField
+                label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
+                className={classes.textField}
+                disabled
+                value={healthFacilityLabel(userHealthFacilityFullPath)}
+            />
+        }
         return <AutoSuggestion
             module="location"
             items={healthFacilities}
@@ -66,6 +77,7 @@ class HealthFacilityPicker extends Component {
 }
 
 const mapStateToProps = state => ({
+    userHealthFacilityFullPath: state.loc.userHealthFacilityFullPath,
     healthFacilities: state.loc.healthFacilities,
 });
 

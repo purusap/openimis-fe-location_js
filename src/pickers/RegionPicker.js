@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
-import { formatMessage, AutoSuggestion, SelectInput, withModulesManager } from "@openimis/fe-core";
+import { TextField } from "@material-ui/core";
+import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
 import { locationLabel } from "../utils";
 
 const styles = theme => ({
-    label: {
-        color: theme.palette.primary.main
-    }
+    textField: {
+        width: "100%",
+    },
 });
 
 class RegionPicker extends Component {
@@ -22,12 +23,22 @@ class RegionPicker extends Component {
     onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
 
     render() {
-        const { intl, value, reset, regions,
+        const { intl, classes, value, reset, userHealthFacilityFullPath, regions,
             withLabel = true, label = null, withNull = false, nullLabel = null,
             preValues = [],
             withPlaceholder, placeholder = null,
             readOnly = false, required = false
         } = this.props;
+
+        if (!!userHealthFacilityFullPath) {
+            return <TextField
+                label={!!withLabel && (label || formatMessage(intl, "location", "RegionPicker.label"))}
+                className={classes.textField}
+                disabled
+                value={locationLabel(userHealthFacilityFullPath.location.parent)}
+            />
+        }
+
         return <AutoSuggestion
             module="location"
             items={regions}
@@ -51,6 +62,7 @@ class RegionPicker extends Component {
 
 const mapStateToProps = state => ({
     regions: state.loc.userL0s || [],
+    userHealthFacilityFullPath: state.loc.userHealthFacilityFullPath,
 });
 
 export default withModulesManager(connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(RegionPicker)))));

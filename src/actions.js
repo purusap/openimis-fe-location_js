@@ -15,7 +15,7 @@ export function fetchUserDistricts() {
 
 function healthFacilityFullPath(key, mm, id) {
   let payload = formatPageQuery("healthFacilities",
-    [`id: "${id}"`],
+    [`id: "${btoa(`HealthFacilityGQLType:${id}`)}"`],
     mm.getRef("location.HealthFacilityPicker.projection")
   );
   return graphql(payload, key);

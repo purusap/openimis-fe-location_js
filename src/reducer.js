@@ -3,6 +3,8 @@ import {
     dispatchMutationReq, dispatchMutationResp, dispatchMutationErr
 } from '@openimis/fe-core';
 
+import { locationLabel } from "./utils";
+
 function reducer(
     state = {
         fetchingHealthFacilityFullPath: false,
@@ -54,9 +56,11 @@ function reducer(
                 userL1s,
             }
         case 'LOCATION_USER_HEALTH_FACILITY_FULL_PATH_RESP':
+            var userHealthFacilityFullPath = parseData(action.payload.data.healthFacilities)[0]
             return {
                 ...state,
-                userHealthFacilityFullPath: parseData(action.payload.data.healthFacilities)[0],
+                userHealthFacilityFullPath,
+                userHealthFacilityLocationStr: !!userHealthFacilityFullPath.location ? locationLabel(userHealthFacilityFullPath.location) : null,
             }
         case 'LOCATION_HEALTH_FACILITY_FULL_PATH_REQ':
             return {

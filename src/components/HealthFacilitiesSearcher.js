@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { injectIntl } from 'react-intl';
+import _ from "lodash";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
     withModulesManager, decodeId, formatDateFromISO,
@@ -204,6 +205,7 @@ class HealthFacilitiesSearcher extends Component {
 
 const mapStateToProps = state => ({
     rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
+    userHealthFacilityFullPath: state.loc.userHealthFacilityFullPath,
     submittingMutation: state.loc.submittingMutation,
     mutation: state.loc.mutation,
     confirmed: state.core.confirmed,
