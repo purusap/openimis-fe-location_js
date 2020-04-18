@@ -16,6 +16,8 @@ class HealthFacilityMasterPanel extends FormPanel {
     constructor(props) {
         super(props);
         this.codeMaxLength = props.modulesManager.getConf("fe-location", "healthFacilityForm.codeMaxLength", 8);
+        this.accCodeMaxLength = props.modulesManager.getConf("fe-location", "healthFacilityForm.accCodeMaxLength", 25);
+        this.accCodeMandatory = props.modulesManager.getConf("fe-location", "healthFacilityForm.accCodeMandatory", true);
     }
 
     updateRegion = region => {
@@ -129,6 +131,21 @@ class HealthFacilityMasterPanel extends FormPanel {
                         />
                     </Grid>
                 } />
+                <ControlledField module="location" id="HealthFacility.accCode" field={
+                    <Grid item xs={2} className={classes.item}>
+                        <TextInput
+                            module="location" label="HealthFacilityFilter.accCode"
+                            name="accCode"
+                            value={edited.code}
+                            readOnly={readOnly}
+                            required={this.accCodeMandatory}
+                            onChange={(v, s) => this.updateAttribute("accCode", v)}
+                            inputProps={{
+                                "maxLength": this.accCodeMaxLength,
+                            }}
+                        />
+                    </Grid>
+                } />
                 <ControlledField module="location" id="HealthFacility.name" field={
                     <Grid item xs={2} className={classes.item}>
                         <TextInput
@@ -151,7 +168,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                     />
                 </Grid>
                 <ControlledField module="location" id="HealthFacility.phone" field={
-                    <Grid item xs={2} className={classes.item}>
+                    <Grid item xs={1} className={classes.item}>
                         <TextInput
                             module="location" label="HealthFacilityFilter.phone"
                             name="phone"
@@ -162,7 +179,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                     </Grid>
                 } />
                 <ControlledField module="location" id="HealthFacility.fax" field={
-                    <Grid item xs={2} className={classes.item}>
+                    <Grid item xs={1} className={classes.item}>
                         <TextInput
                             module="location" label="HealthFacilityFilter.fax"
                             name="fax"

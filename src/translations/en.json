@@ -72,6 +72,7 @@
     "location.MoveDialog.cancel": "Cancel",
     "location.healthFacilitySummaries": "{count} Health Facilities Found",
     "location.healthFacilitySummaries.code": "Code",
+    "location.healthFacilitySummaries.accCode": "Accounting Code",
     "location.healthFacilitySummaries.name": "Name",
     "location.healthFacilitySummaries.legalForm": "Legal Form",
     "location.healthFacilitySummaries.level": "Level",
