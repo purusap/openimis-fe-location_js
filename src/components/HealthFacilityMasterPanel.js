@@ -119,7 +119,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.code" field={
                     <Grid item xs={2} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.code"
+                            module="location" label="HealthFacilityForm.code"
                             name="code"
                             value={edited.code}
                             readOnly={readOnly}
@@ -134,7 +134,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.accCode" field={
                     <Grid item xs={2} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.accCode"
+                            module="location" label="HealthFacilityForm.accCode"
                             name="accCode"
                             value={edited.code}
                             readOnly={readOnly}
@@ -149,7 +149,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.name" field={
                     <Grid item xs={2} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.name"
+                            module="location" label="HealthFacilityForm.name"
                             name="name"
                             value={edited.name}
                             readOnly={readOnly}
@@ -160,7 +160,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 } />
                 <Grid item xs={2} className={classes.item}>
                     <TextAreaInput
-                        module="location" label="HealthFacilityFilter.address"
+                        module="location" label="HealthFacilityForm.address"
                         value={edited.address}
                         rows="2"
                         readOnly={readOnly}
@@ -170,7 +170,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.phone" field={
                     <Grid item xs={1} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.phone"
+                            module="location" label="HealthFacilityForm.phone"
                             name="phone"
                             value={edited.phone}
                             readOnly={readOnly}
@@ -181,7 +181,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.fax" field={
                     <Grid item xs={1} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.fax"
+                            module="location" label="HealthFacilityForm.fax"
                             name="fax"
                             value={edited.fax}
                             readOnly={readOnly}
@@ -192,7 +192,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                 <ControlledField module="location" id="HealthFacility.email" field={
                     <Grid item xs={2} className={classes.item}>
                         <TextInput
-                            module="location" label="HealthFacilityFilter.email"
+                            module="location" label="HealthFacilityForm.email"
                             name="email"
                             value={edited.email}
                             readOnly={readOnly}
