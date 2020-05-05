@@ -98,6 +98,7 @@
     "location.HealthFacilityForm.phone": "Phone",
     "location.HealthFacilityForm.fax": "Fax",
     "location.HealthFacilityForm.email": "Email",
+    "location.HealthFacilityFilter.showHistory": "Show historical values",
     "location.CreateHealthFacility.mutationLabel": "Create Health Facility {code}",
     "location.UpdateHealthFacility.mutationLabel": "Update Health Facilityt { code}",
     "location.DeleteHealthFacility.mutationLabel": "Delete Health Facility {code}",

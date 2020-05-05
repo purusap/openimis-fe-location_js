@@ -40,6 +40,7 @@ class HealthFacilityMasterPanel extends FormPanel {
 
     render() {
         const { classes, edited, reset, readOnly = false } = this.props;
+        console.log(JSON.stringify(edited));
         return (
             <Grid container>
                 <ControlledField module="location" id="HealthFacility.region" field={
@@ -136,7 +137,7 @@ class HealthFacilityMasterPanel extends FormPanel {
                         <TextInput
                             module="location" label="HealthFacilityForm.accCode"
                             name="accCode"
-                            value={edited.code}
+                            value={edited.accCode}
                             readOnly={readOnly}
                             required={this.accCodeMandatory}
                             onChange={(v, s) => this.updateAttribute("accCode", v)}

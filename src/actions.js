@@ -35,7 +35,7 @@ export function fetchHealthFacility(mm, healthFacilityUuid, healthFacilityCode) 
     'showHistory: true'
   ]
   let projections = [
-    "id", "uuid", "code", "name", "careType",
+    "id", "uuid", "code", "accCode", "name", "careType",
     "address", "phone", "fax", "email",
     "legalForm{code}", "level", "subLevel{code}",
     "location{id, uuid, code, name, parent{id, uuid, code, name}}",
@@ -64,7 +64,7 @@ export function fetchHealthFacilities(mm, region, district, str) {
 
 export function fetchHealthFacilitySummaries(filters) {
   var projections = [
-    "id", "uuid", "code", "name", "careType",
+    "id", "uuid", "code", "accCode", "name", "careType",
     "phone", "fax", "email",
     "level", "legalForm{code}",
     "location{code,name, parent{code, name}}",
@@ -180,6 +180,7 @@ function formatHealthFacilityGQL(hf) {
   return `
     ${hf.uuid !== undefined && hf.uuid !== null ? `uuid: "${hf.uuid}"` : ''}
     code: "${hf.code}"
+    accCode: "${hf.accCode}"
     name: "${hf.name}"
     locationId: ${decodeId(hf.location.id)}
     level: "${hf.level}"
