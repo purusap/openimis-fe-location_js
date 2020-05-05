@@ -5,14 +5,12 @@ import { bindActionCreators } from "redux";
 import ReplayIcon from "@material-ui/icons/Replay"
 import {
     Contributions, ProgressOrError, Form,
-    withModulesManager, withHistory, journalize,
+    withModulesManager, journalize,
     formatMessageWithValues,
 } from "@openimis/fe-core";
 import HealthFacilityMasterPanel from "../components/HealthFacilityMasterPanel";
 import HealthFacilityCatchmentPanel from "../components/HealthFacilityCatchmentPanel";
 import { fetchHealthFacility } from "../actions";
-
-const HEALTH_FACILITY_FORM_CONTRIBUTION_KEY = "location.healthFacilityForm";
 
 class HealthFacilityForm extends Component {
 
@@ -152,7 +150,6 @@ class HealthFacilityForm extends Component {
                             onEditedChanged={this.onEditedChanged}
                             actions={actions}
                         />
-                        <Contributions contributionKey={HEALTH_FACILITY_FORM_CONTRIBUTION_KEY} />
                     </Fragment>
                 )}
             </Fragment>
@@ -175,6 +172,6 @@ const mapDispatchToProps = dispatch => {
     return bindActionCreators({ fetchHealthFacility, journalize }, dispatch);
 };
 
-export default withHistory(withModulesManager(connect(mapStateToProps, mapDispatchToProps)(
+export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(
     injectIntl(HealthFacilityForm)
-)));
+));
