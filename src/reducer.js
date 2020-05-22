@@ -1,5 +1,5 @@
 import {
-    formatServerError, formatGraphQLError, parseData, pageInfo, decodeId,
+    formatServerError, formatGraphQLError, parseData, pageInfo,
     dispatchMutationReq, dispatchMutationResp, dispatchMutationErr
 } from '@openimis/fe-core';
 

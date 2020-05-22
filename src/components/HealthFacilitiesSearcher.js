@@ -18,12 +18,6 @@ import {
 import { IconButton } from "@material-ui/core";
 import { RIGHT_HEALTH_FACILITY_DELETE } from "../constants";
 
-const styles = theme => ({
-    root: {
-        width: "100%"
-    },
-});
-
 class HealthFacilitiesSearcher extends Component {
 
     constructor(props) {
