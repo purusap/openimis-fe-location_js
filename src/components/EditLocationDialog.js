@@ -50,7 +50,7 @@ class EditLocationDialog extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!_.isEqual(prevProps.location, this.props.location)) {
-            this.setState({ data: this.props.location });
+            this.setState((state, props) => ({ data: props.location }));
         }
     }
 

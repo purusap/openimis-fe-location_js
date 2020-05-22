@@ -33,7 +33,7 @@ class HealthFacilityFilter extends Component {
             !!this.props.filters['showHistory'] &&
             this.state.showHistory !== this.props.filters['showHistory']['value']
         ) {
-            this.setState({ showHistory: this.props.filters['showHistory']['value'] })
+            this.setState((sate, props) => ({ showHistory: props.filters['showHistory']['value'] }))
         }
     }
 
@@ -66,9 +66,9 @@ class HealthFacilityFilter extends Component {
                 value: null
             },
         ]);
-        this.setState({
-            reset: this.state.reset + 1,
-        });
+        this.setState((state) => ({
+            reset: state.reset + 1,
+        }));
     }
 
     _onChangeDistrict = (v, s) => {
@@ -79,23 +79,9 @@ class HealthFacilityFilter extends Component {
             filters.push(this._regionFilter(v.parent))
         }
         this.props.onChangeFilters(filters);
-        this.setState({
-            reset: this.state.reset + 1,
-        });
-    }
-
-    _onChangeLegalForm = (v, s) => {
-        let filters = [
-            {
-                id: 'legalForm',
-                value: v,
-                filter: `legalForm_Code: "${!!v && v.code}"`
-            }
-        ];
-        this.props.onChangeFilters(filters);
-        this.setState({
-            reset: this.state.reset + 1,
-        });
+        this.setState((state) => ({
+            reset: state.reset + 1,
+        }));
     }
 
     _onChangeShowHistory = () => {
@@ -107,10 +93,10 @@ class HealthFacilityFilter extends Component {
             }
         ];
         this.props.onChangeFilters(filters);
-        this.setState({
-            showHistory: !this.state.showHistory,
-            reset: this.state.reset + 1,
-        });
+        this.setState((state) => ({
+            showHistory: !state.showHistory,
+            reset: state.reset + 1,
+        }));
     }
 
     _onChange = (k, v, s) => {
@@ -122,9 +108,9 @@ class HealthFacilityFilter extends Component {
             }
         ];
         this.props.onChangeFilters(filters);
-        this.setState({
-            reset: this.state.reset + 1,
-        });
+        this.setState((state) => ({
+            reset: state.reset + 1,
+        }));
     }
 
     render() {
@@ -154,21 +140,21 @@ class HealthFacilityFilter extends Component {
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
                         id="location.HealthFacilityLegalFormPicker"
-                        value={this.state.legalForm}
+                        value={(filters['legalForm_Code'] && filters['legalForm_Code']['value'])}
                         onChange={(v, s) => this._onChange('legalForm_Code', v, s)}
                     />
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
                         id="location.HealthFacilityLevelPicker"
-                        value={this.state.healthFacilityLevel}
+                        value={(filters['level'] && filters['level']['value'])}
                         onChange={(v, s) => this._onChange('level', v, s)}
                     />
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
                         id="medical.CareTypePicker"
-                        value={this.state.careType}
+                        value={(filters['careType'] && filters['careType']['value'])}
                         onChange={(v, s) => this._onChange('careType', v, s)}
                     />
                 </Grid>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React from "react";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import {
     ControlledField, PublishedComponent, FormPanel,
@@ -40,7 +40,6 @@ class HealthFacilityMasterPanel extends FormPanel {
 
     render() {
         const { classes, edited, reset, readOnly = false } = this.props;
-        console.log(JSON.stringify(edited));
         return (
             <Grid container>
                 <ControlledField module="location" id="HealthFacility.region" field={

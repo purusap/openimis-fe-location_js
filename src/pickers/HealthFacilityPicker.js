@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
 import { fetchHealthFacilities } from "../actions";
-import { formatMessage, AutoSuggestion, SelectInput, withModulesManager } from "@openimis/fe-core";
+import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";
 import { healthFacilityLabel } from "../utils";
 import _ from "lodash";
 import { TextField } from "@material-ui/core";

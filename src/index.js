@@ -1,4 +1,3 @@
-import React from "react";
 import LocationAlertForwarder from "./components/LocationAlertForwarder";
 import LocationsPage from "./pages/LocationsPage";
 import HealthFacilitiesPage from "./pages/HealthFacilitiesPage";
