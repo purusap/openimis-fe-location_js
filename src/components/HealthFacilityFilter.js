@@ -120,7 +120,7 @@ class HealthFacilityFilter extends Component {
 
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
-                        id="location.RegionPicker"
+                        pubRef="location.RegionPicker"
                         value={(filters['region'] && filters['region']['value'])}
                         reset={this.state.reset}
                         withNull={true}
@@ -129,7 +129,7 @@ class HealthFacilityFilter extends Component {
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
-                        id="location.DistrictPicker"
+                        pubRef="location.DistrictPicker"
                         value={(filters['district'] && filters['district']['value'])}
                         region={(filters['region'] && filters['region']['value'])}
                         reset={this.state.reset}
@@ -139,21 +139,21 @@ class HealthFacilityFilter extends Component {
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
-                        id="location.HealthFacilityLegalFormPicker"
+                        pubRef="location.HealthFacilityLegalFormPicker"
                         value={(filters['legalForm_Code'] && filters['legalForm_Code']['value'])}
                         onChange={(v, s) => this._onChange('legalForm_Code', v, s)}
                     />
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
-                        id="location.HealthFacilityLevelPicker"
+                        pubRef="location.HealthFacilityLevelPicker"
                         value={(filters['level'] && filters['level']['value'])}
                         onChange={(v, s) => this._onChange('level', v, s)}
                     />
                 </Grid>
                 <Grid item xs={2} className={classes.item}>
                     <PublishedComponent
-                        id="medical.CareTypePicker"
+                        pubRef="medical.CareTypePicker"
                         value={(filters['careType'] && filters['careType']['value'])}
                         onChange={(v, s) => this._onChange('careType', v, s)}
                     />
