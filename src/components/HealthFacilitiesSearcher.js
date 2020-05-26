@@ -99,7 +99,7 @@ class HealthFacilitiesSearcher extends Component {
             hf => <PublishedComponent
                 readOnly={true}
                 nullLabel="empty"
-                id="medical.CareTypePicker" withLabel={false} value={hf.careType}
+                pubRef="medical.CareTypePicker" withLabel={false} value={hf.careType}
             />,
             hf => hf.phone,
             hf => hf.fax,
