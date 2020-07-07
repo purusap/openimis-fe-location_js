@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
-import { fetchHealthFacilities } from "../actions";
+import { fetchHealthFacilitiesStr } from "../actions";
 import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";
 import { healthFacilityLabel } from "../utils";
 import _ from "lodash";
@@ -25,17 +25,17 @@ class HealthFacilityPicker extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!this.props.userHealthFacilityFullPath) {
             if (!_.isEqual(prevProps.region, this.props.region)) {
-                this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+                this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
             }
             if (!_.isEqual(prevProps.district, this.props.district)) {
-                this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+                this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
             }
         }
     }
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
-        this.props.fetchHealthFacilities(this.props.modulesManager, this.props.region, this.props.district, str);
+        this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, str);
 
     debouncedGetSuggestion = _.debounce(
         this.getSuggestions,
@@ -82,7 +82,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ fetchHealthFacilities }, dispatch);
+    return bindActionCreators({ fetchHealthFacilitiesStr }, dispatch);
 };
 
 export default withModulesManager(connect(mapStateToProps, mapDispatchToProps)(injectIntl(withTheme(withStyles(styles)(HealthFacilityPicker)))));

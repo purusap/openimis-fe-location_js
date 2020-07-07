@@ -4,6 +4,8 @@ import {
   formatMutation
 } from "@openimis/fe-core";
 
+import { nestParentsProjections } from "./utils";
+
 export function fetchUserDistricts() {
   let payload = formatQuery("userDistricts",
     null,
@@ -50,7 +52,7 @@ export function fetchHealthFacility(mm, healthFacilityUuid, healthFacilityCode) 
   return graphql(payload, 'LOCATION_HEALTH_FACILITY');
 }
 
-export function fetchHealthFacilities(mm, region, district, str) {
+export function fetchHealthFacilitiesStr(mm, region, district, str) {
   let filters = [];
   if (!!str && str.length) filters.push([`str:"${str}"`]);
   if (!!region) filters.push([`regionUuid: "${region.uuid}"`])
@@ -59,7 +61,7 @@ export function fetchHealthFacilities(mm, region, district, str) {
     filters,
     mm.getRef("location.HealthFacilityPicker.projection")
   );
-  return graphql(payload, 'LOCATION_HEALTH_FACILITIES');
+  return graphql(payload, 'LOCATION_HEALTH_FACILITIES_STR');
 }
 
 export function fetchHealthFacilitySummaries(filters) {
@@ -85,6 +87,19 @@ export function fetchLocations(levels, type, parent) {
   let payload = formatPageQuery("locations",
     filters,
     ["id", "uuid", "type", "code", "name", "malePopulation", "femalePopulation", "otherPopulation", "families"]
+  );
+  return graphql(payload, `LOCATION_LOCATIONS_${type}`);
+}
+
+export function fetchLocationsStr(levels, type, parent, str) {
+  let filters = [`type: "${levels[type]}"`, `str: "${str}"`];
+  if (!!parent) {
+    filters.push(`parent_Uuid: "${parent.uuid}"`)
+  }
+  let projections = ["id", "uuid", "type", "code", "name", nestParentsProjections(type)]
+  let payload = formatPageQuery("locationsStr",
+    filters,
+    projections
   );
   return graphql(payload, `LOCATION_LOCATIONS_${type}`);
 }
@@ -163,7 +178,7 @@ export function moveLocation(location, newParent, clientMutationLabel) {
 
 function formatCatchment(catchment) {
   return `{
-    ${!!catchment.id ? `id: ${catchment.id}`:""}
+    ${!!catchment.id ? `id: ${catchment.id}` : ""}
     locationId: ${decodeId(catchment.location.id)}
     catchment: ${catchment.catchment}    
   }`
@@ -231,4 +246,10 @@ export function deleteHealthFacility(hf, clientMutationLabel) {
       requestedDateTime
     }
   )
+}
+
+export function selectLocation(location, level, maxLevels) {
+  return dispatch => {
+    dispatch({ type: `LOCATION_FILTER_SELECTED`, payload: { location, level, maxLevels } })
+  }
 }
