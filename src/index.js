@@ -12,6 +12,9 @@ import HealthFacilityLegalFormPicker from "./pickers/HealthFacilityLegalFormPick
 import HealthFacilityPriceListsPanel from "./components/HealthFacilityPriceListsPanel";
 import CoarseLocationFilter from "./filters/CoarseLocationFilter";
 import DetailedLocationFilter from "./filters/DetailedLocationFilter";
+import CoarseLocation from "./components/CoarseLocation";
+import DetailedLocation from "./components/DetailedLocation";
+import DetailedHealthFacility from "./components/DetailedHealthFacility";
 import RegionPicker from "./pickers/RegionPicker";
 import DistrictPicker from "./pickers/DistrictPicker";
 import LocationPicker from "./pickers/LocationPicker";
@@ -59,6 +62,9 @@ const DEFAULT_CONFIG = {
     { key: "location.HealthFacilitiesPage", ref: HealthFacilitiesPage },
     { key: "location.CoarseLocationFilter", ref: CoarseLocationFilter },
     { key: "location.DetailedLocationFilter", ref: DetailedLocationFilter },
+    { key: "location.CoarseLocation", ref: CoarseLocation },
+    { key: "location.DetailedLocation", ref: DetailedLocation },
+    { key: "location.DetailedHealthFacility", ref: DetailedHealthFacility },
   ],
   "core.Router": [
     { path: ROUTE_LOCATIONS, component: LocationsPage },

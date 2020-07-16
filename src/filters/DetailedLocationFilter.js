@@ -12,6 +12,8 @@ import {
 import { selectLocation } from "../actions";
 import CoarseLocationFilter from "./CoarseLocationFilter";
 
+import { DEFAULT_LOCATION_TYPES } from "../constants";
+
 const styles = theme => ({
     dialogTitle: theme.dialog.title,
     dialogContent: theme.dialog.content,
@@ -33,7 +35,7 @@ class DetailedLocationFilter extends Component {
 
     constructor(props) {
         super(props);
-        this.locationTypes = props.modulesManager.getConf("fe-location", "Location.types", ["R", "D", "W", "V"])
+        this.locationTypes = props.modulesManager.getConf("fe-location", "Location.types", DEFAULT_LOCATION_TYPES)
     }
 
     _filterValue = k => {
@@ -87,10 +89,11 @@ class DetailedLocationFilter extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, split=false} = this.props;
+        let grid = split ? 12 : 6;
         return (
             <Grid container className={classes.form}>
-                <Grid item xs={6}>
+                <Grid item xs={grid}>
                     <CoarseLocationFilter reset={this.state.reset} {...this.props} onChange={this.onChange} />
                 </Grid>
                 {_.times(this.locationTypes.length - 2, i => (
@@ -98,7 +101,7 @@ class DetailedLocationFilter extends Component {
                         id={`DetailedLocationFilter.location_${this.locationTypes.length - 2 + i}`}
                         key={`location_${this.locationTypes.length - 2 + i}`}
                         field={
-                            <Grid item xs={Math.floor(6 / (this.locationTypes.length - 2))} className={classes.item}>
+                            <Grid item xs={Math.floor(grid / (this.locationTypes.length - 2))} className={classes.item}>
                                 <PublishedComponent
                                     pubRef="location.LocationPicker"
                                     value={this._filterValue(`${this.props.anchor}_${this.locationTypes.length - 2 + i}`)}
