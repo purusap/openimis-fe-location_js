@@ -179,7 +179,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'code',
                                 value: v,
-                                filter: `code_Icontains: "${v}"`
+                                filter: !!v ? `code_Icontains: "${v}"` : null
                             }
                         ])}
                     />
@@ -193,7 +193,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'name',
                                 value: v,
-                                filter: `name_Icontains: "${v}"`
+                                filter: !!v ? `name_Icontains: "${v}"` : null
                             }
                         ])}
                     />
@@ -207,7 +207,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'phone',
                                 value: v,
-                                filter: `phone_Icontains: "${v}"`
+                                filter: !!v ? `phone_Icontains: "${v}"` : null
                             }
                         ])}
                     />
@@ -221,7 +221,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'fax',
                                 value: v,
-                                filter: `fax_Icontains: "${v}"`
+                                filter: !!v ? `fax_Icontains: "${v}"` : null
                             }
                         ])}
                     />
@@ -235,7 +235,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'email',
                                 value: v,
-                                filter: `email_Icontains: "${v}"`
+                                filter: !!v? `email_Icontains: "${v}"` : null
                             }
                         ])}
                     />

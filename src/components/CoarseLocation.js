@@ -24,23 +24,24 @@ const styles = theme => ({
 
 class CoarseLocation extends Component {
 
+    state = {
+        region: null,
+        regionChanged: false
+    }
+
     render() {
-        const { classes, value } = this.props;
-        let region = !!value ? value.parent : null;
-        let district = value;
-        while (!!region && !!region.parent) {
-            district = region;
-            region = region.parent;
-        }
+        const { classes, region, district, readOnly, required = false, onChange } = this.props;
         return (
             <Grid container className={classes.form}>
                 <ControlledField module="location" id={`CoarseLocation.location_0`} field={
                     <Grid item xs={6} className={classes.item}>
                         <PublishedComponent
                             pubRef="location.RegionPicker"
-                            readOnly={true}
+                            readOnly={readOnly}
+                            required={required}
                             value={region}
                             withNull={true}
+                            onChange={region => this.setState({ region, regionChanged: true })}
                         />
                     </Grid>
                 } />
@@ -48,10 +49,12 @@ class CoarseLocation extends Component {
                     <Grid item xs={6} className={classes.item}>
                         <PublishedComponent
                             pubRef="location.DistrictPicker"
-                            readOnly={true}
+                            readOnly={readOnly}
+                            required={required}
                             value={district}
-                            region={region}
+                            region={this.state.regionChanged ? this.state.region : region}
                             withNull={true}
+                            onChange={onChange}
                         />
                     </Grid>
                 } />

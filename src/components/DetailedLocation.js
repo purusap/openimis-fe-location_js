@@ -28,24 +28,46 @@ const styles = theme => ({
 
 class DetailedLocation extends Component {
 
+    state = {}
+
     constructor(props) {
         super(props);
         this.locationTypes = props.modulesManager.getConf("fe-location", "Location.types", DEFAULT_LOCATION_TYPES)
     }
 
+    onLocationChange = (i, v) => {
+        this.setState({ [`location_${i}`]: v },
+            e => {
+                if (i === this.locationTypes.length - 3) {
+                    this.props.onChange(v)
+                }
+            })
+    }
+
     render() {
-        const { classes, value, split=false } = this.props;
+        const { classes, value, split = false, readOnly, required = false, onChange } = this.props;
+        let region = !!value ? value.parent : null;
+        let district = value;
+        while (!!region && !!region.parent) {
+            district = region;
+            region = region.parent;
+        }
         let locations = [];
-        let v = { ...value }
+        let v = !!value ? { ...value } : null
         _.times(this.locationTypes.length - 2, i => {
-            locations.unshift(v || {})
-            v = !!v ? v.parent : {};
+            locations.unshift(v || null)
+            v = !!v ? v.parent : null;
         });
         let grid = split ? 12 : 6;
         return (
             <Grid container className={classes.form}>
                 <Grid item xs={grid}>
-                    <CoarseLocationFilter value={value} />
+                    <CoarseLocationFilter
+                        region={region}
+                        district={district}
+                        readOnly={readOnly}
+                        required={required}
+                        onChange={district => this.setState({ [`location_-1`]: district })} />
                 </Grid>
                 {_.times(this.locationTypes.length - 2, i => (
                     <ControlledField module="location"
@@ -56,13 +78,17 @@ class DetailedLocation extends Component {
                                 <PublishedComponent
                                     pubRef="location.LocationPicker"
                                     value={locations[i]}
-                                    readOnly={true}
+                                    parentLocation={this.state[`location_${i - 1}`] || (i === 0 ? district : locations[i - 1])}
+                                    readOnly={readOnly}
+                                    required={required}
                                     withNull={true}
                                     locationLevel={this.locationTypes.length - 2 + i}
+                                    onChange={v => this.onLocationChange(i, v)}
                                 />
                             </Grid>
                         } />
-                ))}
+                )
+                )}
             </Grid>
         )
     }
