@@ -32,15 +32,34 @@ class DetailedHealthFacility extends Component {
         level: null,
     }
 
+    _onChange = (hf) => {
+        if (!!hf && (
+            (hf.location.id !== (!!this.state.district && this.state.district.id)) ||
+            (hf.level !== this.state.level)
+        )) {
+            this.setState(
+                {
+                    district: hf.location,
+                    level: hf.level,
+                },
+                e => !!this.props.onChange && this.props.onChange(hf)
+            )
+        } else if (!!this.props.onChange) {
+            this.props.onChange(null)
+        }
+    }
+
     render() {
-        const { classes, value, split = false, readOnly = true } = this.props;
+        const { classes, value, split = false, readOnly = true, onChange } = this.props;
         let grid = split ? 12 : 6;
+        let region = (!!value && !!value.location && value.location.parent) || (this.state.district && this.state.district.parent)
+        let district = (!!value && value.location) || this.state.district
         return (
             <Grid container className={classes.form}>
                 <Grid item xs={grid}>
                     <CoarseLocationFilter
-                        region={!!value && !!value.location && value.location.parent}
-                        district={!!value && value.location}
+                        region={region}
+                        district={district}
                         readOnly={readOnly}
                         onChange={district => this.setState({ district })}
                     />
@@ -69,7 +88,7 @@ class DetailedHealthFacility extends Component {
                                 value={value}
                                 readOnly={readOnly}
                                 withNull={true}
-                                onChange={e => console.log(JSON.stringify(e))}
+                                onChange={this._onChange}
                             />
                         </Grid>
                     } />
