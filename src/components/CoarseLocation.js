@@ -30,7 +30,7 @@ class CoarseLocation extends Component {
     }
 
     render() {
-        const { classes, region, district, readOnly, required = false, onChange } = this.props;
+        const { classes, id, region, district, readOnly, required = false, onChange } = this.props;
         return (
             <Grid container className={classes.form}>
                 <ControlledField module="location" id={`CoarseLocation.location_0`} field={

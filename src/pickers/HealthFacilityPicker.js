@@ -24,18 +24,18 @@ class HealthFacilityPicker extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!this.props.userHealthFacilityFullPath) {
-            if (!_.isEqual(prevProps.region, this.props.region)) {
-                this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
-            }
-            if (!_.isEqual(prevProps.district, this.props.district)) {
-                this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, this.props.value);
+            if (!_.isEqual(prevProps.region, this.props.region) ||
+                !_.isEqual(prevProps.district, this.props.district) ||
+                !_.isEqual(prevProps.level, this.props.level)
+            ) {
+                this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, this.props.value, this.props.level);
             }
         }
     }
 
     getSuggestions = str => !!str &&
         str.length >= this.props.modulesManager.getConf("fe-location", "healthFacilitiesMinCharLookup", 2) &&
-        this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, str);
+        this.props.fetchHealthFacilitiesStr(this.props.modulesManager, this.props.region, this.props.district, str, this.props.level);
 
     debouncedGetSuggestion = _.debounce(
         this.getSuggestions,

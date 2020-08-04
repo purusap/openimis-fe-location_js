@@ -27,35 +27,49 @@ const styles = theme => ({
 
 class DetailedHealthFacility extends Component {
 
+    state = {
+        district: null,
+        level: null,
+    }
+
     render() {
-        const { classes, value, split = false } = this.props;
+        const { classes, value, split = false, readOnly = true } = this.props;
         let grid = split ? 12 : 6;
         return (
             <Grid container className={classes.form}>
                 <Grid item xs={grid}>
-                    <CoarseLocationFilter value={value.location} />
+                    <CoarseLocationFilter
+                        region={!!value && !!value.location && value.location.parent}
+                        district={!!value && value.location}
+                        readOnly={readOnly}
+                        onChange={district => this.setState({ district })}
+                    />
                 </Grid>
                 <ControlledField module="location"
-                    id="DetailedHealthFacility.FSPLevel"
+                    id="DetailedHealthFacility.Level"
                     field={
                         <Grid item xs={grid / 3} className={classes.item}>
                             <PublishedComponent
                                 pubRef="location.HealthFacilityLevelPicker"
-                                value={value.level}
-                                readOnly={true}
+                                value={(!!value && value.level) || this.state.level}
+                                readOnly={readOnly}
                                 withNull={true}
+                                onChange={level => this.setState({ level })}
                             />
                         </Grid>
                     } />
                 <ControlledField module="location"
-                    id="DetailedHealthFacility.FSPLevel"
+                    id="DetailedHealthFacility.HF"
                     field={
                         <Grid item xs={grid / 3 * 2} className={classes.item}>
                             <PublishedComponent
                                 pubRef="location.HealthFacilityPicker"
+                                district={(!!value && value.location) || this.state.district}
+                                level={(!!value && value.level) || this.state.level}
                                 value={value}
-                                readOnly={true}
+                                readOnly={readOnly}
                                 withNull={true}
+                                onChange={e => console.log(JSON.stringify(e))}
                             />
                         </Grid>
                     } />
