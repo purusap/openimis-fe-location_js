@@ -71,7 +71,8 @@ export function fetchHealthFacilitySummaries(filters) {
     "phone", "fax", "email",
     "level", "legalForm{code}",
     "location{code,name, parent{code, name}}",
-    "validityFrom", "validityTo"
+    "validityFrom", "validityTo",
+    "clientMutationId"
   ]
   const payload = formatPageQueryWithCount("healthFacilities",
     filters,
@@ -87,7 +88,7 @@ export function fetchLocations(levels, type, parent) {
   }
   let payload = formatPageQuery("locations",
     filters,
-    ["id", "uuid", "type", "code", "name", "malePopulation", "femalePopulation", "otherPopulation", "families"]
+    ["id", "uuid", "type", "code", "name", "malePopulation", "femalePopulation", "otherPopulation", "families", "clientMutationId"]
   );
   return graphql(payload, `LOCATION_LOCATIONS_${type}`);
 }
