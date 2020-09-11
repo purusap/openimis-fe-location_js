@@ -107,7 +107,7 @@ class ActionDialogs extends Component {
 const StyledActionDialogs = injectIntl(ActionDialogs)
 
 class ResultPane extends Component {
-    
+
     render() {
         const { classes, rights, type, fetching, fetched, error,
             locations, location, onSelect, onEdit, onDelete, onMove,
