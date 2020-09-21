@@ -24,7 +24,7 @@ class RegionPicker extends Component {
 
     render() {
         const { intl, classes, value, reset, userHealthFacilityFullPath, regions,
-            withLabel = true, label = null, withNull = false, nullLabel = null,
+            withLabel = true, label = null, withNull = false, nullLabel = null, filterLabels = true,
             preValues = [],
             withPlaceholder, placeholder = null,
             readOnly = false, required = false
@@ -38,7 +38,6 @@ class RegionPicker extends Component {
                 value={locationLabel(userHealthFacilityFullPath.location.parent)}
             />
         }
-
         return <AutoSuggestion
             module="location"
             items={regions}
@@ -55,7 +54,10 @@ class RegionPicker extends Component {
             required={required}
             selectThreshold={this.selectThreshold}
             withNull={withNull}
-            nullLabel={nullLabel || formatMessage(intl, "location", "location.RegionPicker.null")}
+            nullLabel={nullLabel ||
+                filterLabels ?
+                formatMessage(intl, "location", "location.RegionPicker.null") :
+                formatMessage(intl, "location", "location.RegionPicker.none")}
         />
     }
 }

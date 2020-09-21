@@ -26,11 +26,47 @@ class CoarseLocation extends Component {
 
     state = {
         region: null,
-        regionChanged: false
+        district: null,
+    }
+
+    computeState = () => {
+        this.setState({
+            region: this.props.region,
+            district: this.props.district,
+        })
+    }
+
+    componentDidMount() {
+        this.computeState();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!_.isEqual(prevProps.region, this.props.region) ||
+            !_.isEqual(prevProps.district, this.props.district)
+        ) {
+            this.computeState();
+        }
+    }
+
+    onChangeRegion = region => {
+        this.setState({
+            region,
+            district: null,
+        },
+            e => this.props.onChange(null)
+        )
+    }
+
+    onChangeDistrict = d => {
+        if (!!d) {
+            this.setState({ region: d.parent })
+        }
+        this.props.onChange(d)
     }
 
     render() {
-        const { classes, id, region, district, readOnly, required = false, onChange } = this.props;
+        const { classes, id, readOnly, required = false, onChange, filterLabels = true } = this.props;
+        const { region, district } = this.state;
         return (
             <Grid container className={classes.form}>
                 <ControlledField module="location" id={`CoarseLocation.location_0`} field={
@@ -41,7 +77,8 @@ class CoarseLocation extends Component {
                             required={required}
                             value={region}
                             withNull={true}
-                            onChange={region => this.setState({ region, regionChanged: true })}
+                            filterLabels={filterLabels}
+                            onChange={this.onChangeRegion}
                         />
                     </Grid>
                 } />
@@ -52,9 +89,10 @@ class CoarseLocation extends Component {
                             readOnly={readOnly}
                             required={required}
                             value={district}
-                            region={this.state.regionChanged ? this.state.region : region}
+                            region={this.state.region}
                             withNull={true}
-                            onChange={onChange}
+                            filterLabels={filterLabels}
+                            onChange={this.onChangeDistrict}
                         />
                     </Grid>
                 } />

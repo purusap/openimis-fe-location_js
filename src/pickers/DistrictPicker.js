@@ -20,11 +20,13 @@ class DistrictPicker extends Component {
         this.selectThreshold = props.modulesManager.getConf("fe-location", "DistrictPicker.selectThreshold", 10);
     }
 
-    onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
+    onSuggestionSelected = v => {
+        this.props.onChange(v, locationLabel(v));
+    }
 
     render() {
         const { intl, classes, userHealthFacilityFullPath, reset, value,
-            withLabel = true, label, withNull = false, nullLabel = null,
+            withLabel = true, label, withNull = false, nullLabel = null, filterLabels = true,
             region, districts,
             readOnly = false, required = false } = this.props;
 
@@ -59,7 +61,10 @@ class DistrictPicker extends Component {
                 required={required}
                 selectThreshold={this.selectThreshold}
                 withNull={withNull}
-                nullLabel={nullLabel || formatMessage(intl, "location", "location.DistrictPicker.null")}
+                nullLabel={nullLabel ||
+                    filterLabels ?
+                    formatMessage(intl, "location", "location.DistrictPicker.null") :
+                    formatMessage(intl, "location", "location.DistrictPicker.none")}
             />
         )
     }

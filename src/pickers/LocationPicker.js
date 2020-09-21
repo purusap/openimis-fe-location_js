@@ -32,11 +32,13 @@ class LocationPicker extends Component {
         this.props.modulesManager.getConf("fe-location", "debounceTime", 800)
     )
 
-    onSuggestionSelected = v => this.props.onChange(v, locationLabel(v));
+    onSuggestionSelected = v => {
+        this.props.onChange(v, locationLabel(v));
+    }
 
     render() {
         const { intl, locationLevel, value, reset, locations,
-            withLabel = true, label = null, withNull = false, nullLabel = null,
+            withLabel = true, label = null, withNull = false, nullLabel = null, filterLabels = true,
             preValues = [],
             withPlaceholder, placeholder = null,
             readOnly = false, required = false
@@ -58,7 +60,10 @@ class LocationPicker extends Component {
             required={required}
             selectThreshold={this.selectThreshold}
             withNull={withNull}
-            nullLabel={nullLabel || formatMessage(intl, "location", `location.Location${locationLevel}Picker.null`)}
+            nullLabel={nullLabel ||
+                filterLabels ?
+                formatMessage(intl, "location", `location.Location${locationLevel}Picker.null`) :
+                formatMessage(intl, "location", `location.Location${locationLevel}Picker.none`)}
         />
     }
 }
