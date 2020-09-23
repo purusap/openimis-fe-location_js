@@ -18,6 +18,7 @@ import DetailedHealthFacility from "./components/DetailedHealthFacility";
 import RegionPicker from "./pickers/RegionPicker";
 import DistrictPicker from "./pickers/DistrictPicker";
 import LocationPicker from "./pickers/LocationPicker";
+import LocationTypePicker from "./pickers/LocationTypePicker";
 import messages_en from "./translations/en.json";
 import reducer from "./reducer";
 
@@ -56,6 +57,7 @@ const DEFAULT_CONFIG = {
     { key: "location.LocationPicker", ref: LocationPicker },
     { key: "location.HealthFacilityGQLType", ref: "HealthFacilityGQLType" },
     { key: "location.HealthFacilityPriceListsPanel", ref: HealthFacilityPriceListsPanel },
+    { key: "location.LocationTypePicker", ref: LocationTypePicker },
     { key: "location.LocationGQLType", ref: "LocationGQLType" },
     { key: "location.Location.MaxLevels", ref: "4" },
     { key: "location.LocationsPage", ref: LocationsPage },

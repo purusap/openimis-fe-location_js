@@ -112,5 +112,10 @@
     "location.DeleteHealthFacility.mutationLabel": "Delete Health Facility {code}",
     "location.healthFacility.edit.title": "Health Facility {code}",
     "location.deleteHealthFacility.confirm.title": "Delete Health Facility",
-    "location.deleteHealthFacility.confirm.message": "Are you sure you want to delete Health Facility {code} - {name}?"
+    "location.deleteHealthFacility.confirm.message": "Are you sure you want to delete Health Facility {code} - {name}?",
+    "location.locationType": "Location type",
+    "location.locationType.R": "Region",
+    "location.LocationType.D": "District",
+    "location.LocationType.W": "Municipality",
+    "location.LocationType.V": "Village"
 }
