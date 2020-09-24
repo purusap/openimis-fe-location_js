@@ -114,8 +114,9 @@
     "location.deleteHealthFacility.confirm.title": "Delete Health Facility",
     "location.deleteHealthFacility.confirm.message": "Are you sure you want to delete Health Facility {code} - {name}?",
     "location.locationType": "Location type",
+    "location.locationType.null": "None",
     "location.locationType.R": "Region",
-    "location.LocationType.D": "District",
-    "location.LocationType.W": "Municipality",
-    "location.LocationType.V": "Village"
+    "location.locationType.D": "District",
+    "location.locationType.W": "Municipality",
+    "location.locationType.V": "Village"
 }
