@@ -1,6 +1,6 @@
 import {
   graphql, decodeId,
-  formatQuery, formatPageQuery, formatPageQueryWithCount,
+  formatQuery, formatPageQuery, formatPageQueryWithCount, formatGQLString,
   formatMutation
 } from "@openimis/fe-core";
 
@@ -115,8 +115,8 @@ export function clearLocations(type) {
 function formatLocationGQL(location) {
   return `
     ${location.uuid !== undefined && location.uuid !== null ? `uuid: "${location.uuid}"` : ''}
-    code: "${location.code}"
-    name: "${location.name}"
+    code: "${formatGQLString(location.code)}"
+    name: "${formatGQLString(location.name)}"
     ${!!location.parentUuid ? `parentUuid: "${location.parentUuid}"` : ""}
     ${!!location.malePopulation ? `malePopulation: ${location.malePopulation}` : ""}
     ${!!location.femalePopulation ? `femalePopulation: ${location.femalePopulation}` : ""}
@@ -196,18 +196,18 @@ function formatCatchments(catchments) {
 function formatHealthFacilityGQL(hf) {
   return `
     ${hf.uuid !== undefined && hf.uuid !== null ? `uuid: "${hf.uuid}"` : ''}
-    code: "${hf.code}"
-    accCode: "${hf.accCode}"
-    name: "${hf.name}"
+    code: "${formatGQLString(hf.code)}"
+    accCode: "${formatGQLString(hf.accCode)}"
+    name: "${formatGQLString(hf.name)}"
     locationId: ${decodeId(hf.location.id)}
     level: "${hf.level}"
     legalFormId: "${hf.legalForm.code}"
     careType: "${hf.careType}"
     ${!!hf.subLevel ? `subLevelId: "${hf.subLevel.code}"` : ""}
-    ${!!hf.address ? `address: ${JSON.stringify(hf.address)}` : ""}
-    ${!!hf.phone ? `phone: "${hf.phone}"` : ""}
-    ${!!hf.fax ? `fax: "${hf.fax}"` : ""}
-    ${!!hf.email ? `email: "${hf.email}"` : ""}
+    ${!!hf.address ? `address: "${formatGQLString(hf.address)}"` : ""}
+    ${!!hf.phone ? `phone: "${formatGQLString(hf.phone)}"` : ""}
+    ${!!hf.fax ? `fax: "${formatGQLString(hf.fax)}"` : ""}
+    ${!!hf.email ? `email: "${formatGQLString(hf.email)}"` : ""}
     ${!!hf.servicesPricelist ? `servicesPricelistId: ${decodeId(hf.servicesPricelist.id)}` : ""}
     ${!!hf.itemsPricelist ? `itemsPricelistId: ${decodeId(hf.itemsPricelist.id)}` : ""}
     ${formatCatchments(hf.catchments)}

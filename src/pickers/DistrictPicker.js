@@ -55,6 +55,7 @@ class DistrictPicker extends Component {
                 getSuggestionValue={locationLabel}
                 renderSuggestion={a => <span>{locationLabel(a)}</span>}
                 onSuggestionSelected={this.onSuggestionSelected}
+                onClear={this.onSuggestionSelected}
                 value={value}
                 reset={reset}
                 readOnly={readOnly}

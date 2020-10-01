@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { injectIntl } from 'react-intl';
-import { TextField } from "@material-ui/core";
 import { formatMessage, AutoSuggestion, withModulesManager } from "@openimis/fe-core";
 import _debounce from "lodash/debounce";
 import { locationLabel } from "../utils";
@@ -17,10 +16,24 @@ const styles = theme => ({
 
 class LocationPicker extends Component {
 
+    state = {
+        locations: []
+    }
+
     constructor(props) {
         super(props);
         this.locationTypes = props.modulesManager.getConf("fe-location", "Location.types", ["R", "D", "W", "V"])
         this.selectThreshold = props.modulesManager.getConf("fe-location", "LocationPicker.selectThreshold", 10);
+    }
+
+    componentDidMount() {
+        this.setState({ locations: this.props.locations });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!_.isEqual(prevProps.locations, this.props.locations)) {
+            this.setState({ locations: this.props.locations })
+        }
     }
 
     getSuggestions = str => !!str &&
@@ -33,16 +46,25 @@ class LocationPicker extends Component {
     )
 
     onSuggestionSelected = v => {
-        this.props.onChange(v, locationLabel(v));
+        this.props.onChange(v, locationLabel(v))
+    }
+
+    onClear = () => {
+        this.setState(
+            { locations: [] },
+            e => this.onSuggestionSelected(null)
+        );
     }
 
     render() {
-        const { intl, locationLevel, value, reset, locations,
+        const { intl, locationLevel, value, reset,
             withLabel = true, label = null, withNull = false, nullLabel = null, filterLabels = true,
             preValues = [],
             withPlaceholder, placeholder = null,
             readOnly = false, required = false
         } = this.props;
+        const { locations } = this.state;
+
         return <AutoSuggestion
             module="location"
             items={locations}
@@ -53,6 +75,7 @@ class LocationPicker extends Component {
             renderSuggestion={a => <span>{locationLabel(a)}</span>}
             getSuggestions={this.getSuggestions}
             getSuggestionValue={locationLabel}
+            onClear={this.onClear}
             onSuggestionSelected={this.onSuggestionSelected}
             value={value}
             reset={reset}

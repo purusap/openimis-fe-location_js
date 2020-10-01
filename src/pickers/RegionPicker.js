@@ -48,6 +48,7 @@ class RegionPicker extends Component {
             renderSuggestion={a => <span>{locationLabel(a)}</span>}
             getSuggestionValue={locationLabel}
             onSuggestionSelected={this.onSuggestionSelected}
+            onClear={this.onSuggestionSelected}
             value={value}
             reset={reset}
             readOnly={readOnly}
@@ -57,7 +58,8 @@ class RegionPicker extends Component {
             nullLabel={nullLabel ||
                 filterLabels ?
                 formatMessage(intl, "location", "location.RegionPicker.null") :
-                formatMessage(intl, "location", "location.RegionPicker.none")}
+                formatMessage(intl, "location", "location.RegionPicker.none")
+            }
         />
     }
 }

@@ -31,7 +31,7 @@ class CoarseLocation extends Component {
 
     computeState = () => {
         this.setState({
-            region: this.props.region,
+            region: this.props.region || this.state.region,
             district: this.props.district,
         })
     }

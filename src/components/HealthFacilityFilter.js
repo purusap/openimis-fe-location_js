@@ -46,7 +46,7 @@ class HealthFacilityFilter extends Component {
         return {
             id: 'region',
             value: v,
-            filter: `location_Parent_Uuid: "${!!v && v.uuid}"`
+            filter: !!v ? `location_Parent_Uuid: "${v.uuid}"` : null
         }
     }
 
@@ -54,7 +54,7 @@ class HealthFacilityFilter extends Component {
         return {
             id: 'district',
             value: v,
-            filter: `location_Uuid: "${!!v && v.uuid}"`
+            filter: !!v ? `location_Uuid: "${v.uuid}"` : null
         }
     }
 
@@ -235,7 +235,7 @@ class HealthFacilityFilter extends Component {
                             {
                                 id: 'email',
                                 value: v,
-                                filter: !!v? `email_Icontains: "${v}"` : null
+                                filter: !!v ? `email_Icontains: "${v}"` : null
                             }
                         ])}
                     />

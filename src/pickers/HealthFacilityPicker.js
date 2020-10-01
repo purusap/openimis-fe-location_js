@@ -17,13 +17,23 @@ const styles = theme => ({
 
 class HealthFacilityPicker extends Component {
 
+    state = {
+        healthFacilities: []
+    }
+
     constructor(props) {
         super(props);
         this.selectThreshold = props.modulesManager.getConf("fe-location", "HealthFacilityPicker.selectThreshold", 10);
     }
 
+    componentDidMount() {
+        this.setState({ healthFacilities: this.props.healthFacilities });
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!this.props.userHealthFacilityFullPath) {
+        if (!_.isEqual(prevProps.healthFacilities, this.props.healthFacilities)) {
+            this.setState({ healthFacilities: this.props.healthFacilities })
+        } else if (!this.props.userHealthFacilityFullPath) {
             if (!_.isEqual(prevProps.region, this.props.region) ||
                 !_.isEqual(prevProps.district, this.props.district) ||
                 !_.isEqual(prevProps.level, this.props.level)
@@ -44,9 +54,17 @@ class HealthFacilityPicker extends Component {
 
     onSuggestionSelected = v => this.props.onChange(v, healthFacilityLabel(v));
 
+    onClear = () => {
+        this.setState(
+            { healthFacilities: [] },
+            e => this.onSuggestionSelected(null)
+        );
+    }
+
     render() {
-        const { intl, classes, value, reset, userHealthFacilityFullPath, healthFacilities, withLabel = true, label,
+        const { intl, classes, value, reset, userHealthFacilityFullPath, withLabel = true, label,
             readOnly = false, required = false, withNull = true, nullLabel = null } = this.props;
+        const { healthFacilities } = this.state;
 
         if (!!userHealthFacilityFullPath) {
             return <TextField
@@ -61,6 +79,7 @@ class HealthFacilityPicker extends Component {
             items={healthFacilities}
             label={!!withLabel && (label || formatMessage(intl, "location", "HealthFacilityPicker.label"))}
             lookup={healthFacilityLabel}
+            onClear={this.onClear}
             getSuggestions={this.debouncedGetSuggestion}
             renderSuggestion={a => <span>{healthFacilityLabel(a)}</span>}
             getSuggestionValue={healthFacilityLabel}
