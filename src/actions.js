@@ -28,7 +28,7 @@ export function fetchUserHealthFacilityFullPath(mm, id) {
 }
 
 export function fetchHealthFacilityFullPath(mm, id) {
-  return healthFacilityFullPath('LOCATION_HEALTH_FACILITY_FULL_PATH', mm, id);
+  return healthFacilityFullPath('LOCATION_HEALTH_FACILITY_FULL_PATH', mm, decodeId(id));
 }
 
 export function fetchHealthFacility(mm, healthFacilityUuid, healthFacilityCode) {
