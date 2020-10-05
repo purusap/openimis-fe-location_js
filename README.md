@@ -26,7 +26,7 @@ None
 * `LOCATION_USER_DISTRICTS_{REQ|RESP|ERR}`: loading user's registered districts. Known usage: `UserDistrictsLoader` boot component
 * `LOCATION_USER_HEALTH_FACILITY_FULL_PATH_{REQ|RESP|ERR}`, loading user default health facility (full path). Known usage: `UserHealthFacilityLoader` boot component
 * `LOCATION_HEALTH_FACILITY_FULL_PATH_{REQ|RESP|ERR}`, loading health facility full path. Known usage: `UserHealthFacilityLoader`, `HealthFacilityFullPathComponent` (itself used in `insuree.InsureeFirstServicePoint`), 
-* `LOCATION_HEALTH_FACILITIES_{REQ|RESP|ERR}`, loading Health Facilities (full text search on code + name). Known usage: `HealthFacilityPicker`
+* `LOCATION_HEALTH_FACILITIES_STR_{REQ|RESP|ERR}`, loading Health Facilities (full text search on code + name). Known usage: `HealthFacilityPicker`
 
 ## Other Modules Listened Redux Actions
 None
