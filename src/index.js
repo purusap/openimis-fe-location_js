@@ -46,6 +46,7 @@ const DEFAULT_CONFIG = {
         `location{${LOCATION_SUMMARY_PROJECTION.join(",")}, parent{${LOCATION_SUMMARY_PROJECTION.join(",")}}}`
       ]
     },
+    { key: "location.HealthFacilityPicker.sort", ref: 'healthFacility__code' },
     { key: "location.HealthFacilityLevelPicker", ref: HealthFacilityLevelPicker },
     { key: "location.HealthFacilityLevelPicker.projection", ref: null },
     { key: "location.HealthFacilitySubLevelPicker", ref: HealthFacilitySubLevelPicker },
