@@ -10,7 +10,7 @@ import {
     ControlledField, PublishedComponent,
 } from "@openimis/fe-core";
 import { selectLocation } from "../actions";
-import CoarseLocationFilter from "./CoarseLocation";
+import CoarseLocation from "./CoarseLocation";
 
 const styles = theme => ({
     dialogTitle: theme.dialog.title,
@@ -57,7 +57,7 @@ class DetailedHealthFacility extends Component {
         return (
             <Grid container className={classes.form}>
                 <Grid item xs={grid}>
-                    <CoarseLocationFilter
+                    <CoarseLocation
                         region={region}
                         district={district}
                         readOnly={readOnly}
